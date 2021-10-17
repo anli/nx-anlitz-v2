@@ -1,0 +1,30 @@
+name: Integration
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  test:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Setup env
+        run: |
+          git fetch origin $GITHUB_BASE_REF
+      - uses: actions/setup-node@v2
+      - name: Install node modules
+        run: |
+          npm ci
+      - name: Run lint
+        run: |
+          npm run lint -- --base=origin/$GITHUB_BASE_REF
+      - name: Run tests
+        run: |
+          npm run test -- --configuration=ci --base=origin/$GITHUB_BASE_REF
