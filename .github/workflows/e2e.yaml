@@ -1,0 +1,54 @@
+name: E2E
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  test:
+    name: E2E Android
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Setup env
+        run: |
+          git fetch origin $GITHUB_BASE_REF
+      - uses: actions/setup-node@v2
+      - name: Install node modules
+        run: |
+          npm ci
+
+      - name: Install app node modules
+        run: |
+          npx nx ensure-symlink
+
+      - name: Use specific Java version for sdkmanager to work
+        uses: joschi/setup-jdk@v2
+        with:
+          java-version: '8'
+          architecture: 'x64'
+
+      - name: Build Android app
+        run: |
+          npm run e2e-build-android -- --configuration=production --base=origin/$GITHUB_BASE_REF
+
+      - name: Download Android emulator
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-30;google_apis;x86"
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name Pixel_4a_API_30 --device "pixel" -k 'system-images;android-30;google_apis;x86'
+          $ANDROID_HOME/emulator/emulator -list-avds
+
+      - name: Boot Android emulator
+        run: |
+          nohup $ANDROID_HOME/emulator/emulator -avd Pixel_4a_API_30 -no-audio -no-snapshot -no-window &
+          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+          $ANDROID_HOME/platform-tools/adb devices
+
+      - name: Test Android app
+        run: |
+          npm run e2e-test-android -- --configuration=production --base=origin/$GITHUB_BASE_REF

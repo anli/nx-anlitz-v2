@@ -117,7 +117,7 @@
             }
           }
         },
-        "build-android": {
+        "e2e-build-android": {
           "executor": "@nrwl/detox:build",
           "options": {
             "detoxConfiguration": "android.emu.debug"
@@ -128,7 +128,7 @@
             }
           }
         },
-        "test-android": {
+        "e2e-test-android": {
           "executor": "@nrwl/detox:test",
           "options": {
             "detoxConfiguration": "android.emu.debug"
