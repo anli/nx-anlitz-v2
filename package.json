@@ -4,6 +4,8 @@
   "license": "MIT",
   "scripts": {
     "android": "nx run-android",
+    "e2e-build-android": "nx affected --target=e2e-build-android",
+    "e2e-test-android": "nx affected --target=e2e-test-android",
     "ios": "nx run-ios",
     "lint": "nx affected:lint",
     "start": "nx serve",
