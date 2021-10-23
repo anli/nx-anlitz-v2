@@ -99,3 +99,6 @@ apps/habit-app-e2e/artifacts
 
 **/coverage
 **/node_modules
+
+**/fastlane/README.md
+**/fastlane/report.xml
