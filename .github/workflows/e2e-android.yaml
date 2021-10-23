@@ -27,12 +27,6 @@ jobs:
         run: |
           npx nx ensure-symlink
 
-      - name: Use specific Java version for sdkmanager to work
-        uses: joschi/setup-jdk@v2
-        with:
-          java-version: '8'
-          architecture: 'x64'
-
       - name: Build Android app
         run: |
           npm run e2e-build-android -- --configuration=production --base=origin/$GITHUB_BASE_REF

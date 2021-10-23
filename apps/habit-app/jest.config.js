@@ -1,9 +1,4 @@
 module.exports = {
-  displayName: 'habit-app',
-  preset: 'react-native',
-  resolver: '@nrwl/jest/plugins/resolver',
-  moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
-  setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
   coverageThreshold: {
     global: {
       branches: 100,
@@ -12,4 +7,13 @@ module.exports = {
       statements: 100,
     },
   },
+  displayName: 'habit-app',
+  moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
+  moduleNameMapper: {
+    '^.+.(css|style|less|sass|scss|png|jpg|ttf|woff|woff2)$':
+      'jest-transform-stub',
+  },
+  preset: 'react-native',
+  resolver: '@nrwl/jest/plugins/resolver',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
