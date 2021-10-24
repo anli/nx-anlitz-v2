@@ -75,6 +75,9 @@ jobs:
         if: steps.cache-pods.outputs.cache-hit != 'true'
         run: |
           npx pod-install apps/habit-app/ios
+      - name: Rebuild detox
+        run: |
+          npx detox clean-framework-cache && npx detox build-framework-cache
       - name: Build iOS app
         run: |
           npm run e2e-build-ios -- --configuration=production --base=origin/$GITHUB_BASE_REF

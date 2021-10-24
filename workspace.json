@@ -151,6 +151,40 @@
           }
         }
       }
+    },
+    "habit-app-feature-habits-screen": {
+      "root": "libs/habit-app/feature/habits-screen",
+      "sourceRoot": "libs/habit-app/feature/habits-screen/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/habit-app/feature/habits-screen/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/habit-app/feature/habits-screen"
+          ],
+          "options": {
+            "jestConfig": "libs/habit-app/feature/habits-screen/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs/habit-app/feature/habits-screen"
+            }
+          }
+        }
+      }
     }
   },
   "cli": {

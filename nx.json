@@ -14,12 +14,7 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "NGUyNTlmOWEtNjdiMi00MTFjLWIyZDgtMDcyZGU5NTc3YTRifHJlYWQtd3JpdGU="
       }
     }
@@ -38,9 +33,10 @@
     },
     "habit-app-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "habit-app"
-      ]
+      "implicitDependencies": ["habit-app"]
+    },
+    "habit-app-feature-habits-screen": {
+      "tags": []
     }
   }
 }

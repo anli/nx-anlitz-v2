@@ -3,7 +3,9 @@ import React from 'react';
 import 'react-native';
 import { App } from './app';
 
-it('renders correctly', () => {
-  const { getByText } = render(<App />);
-  expect(getByText('Welcome')).toBeDefined();
+describe('App', () => {
+  it('App is loaded', () => {
+    const { getByTestId } = render(<App />);
+    expect(getByTestId('HabitsScreen')).toBeDefined();
+  });
 });

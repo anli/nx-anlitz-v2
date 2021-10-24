@@ -1,11 +1,11 @@
 import { by, device, element, expect } from 'detox';
 
-describe('Habit App', () => {
+describe('App', () => {
   beforeEach(async () => {
     await device.reloadReactNative();
   });
 
-  it('should display welcome message', async () => {
-    await expect(element(by.text('Welcome'))).toBeVisible();
+  it('App is loaded', async () => {
+    await expect(element(by.text('Habits'))).toBeVisible();
   });
 });

@@ -1,22 +1,18 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { HabitsScreen } from '@nx-anlitz/habit-app/feature/habits-screen';
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
-
-const HomeScreen = () => {
-  return (
-    <SafeAreaView>
-      <Text>Welcome</Text>
-    </SafeAreaView>
-  );
-};
 
 const Stack = createNativeStackNavigator();
 
 export const App = () => (
   <NavigationContainer>
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="HabitsScreen"
+        component={HabitsScreen.Component}
+        options={HabitsScreen.options}
+      />
     </Stack.Navigator>
   </NavigationContainer>
 );
