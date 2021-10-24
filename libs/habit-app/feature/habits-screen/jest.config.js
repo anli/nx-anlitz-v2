@@ -7,7 +7,7 @@ module.exports = {
       statements: 100,
     },
   },
-  displayName: 'habit-app',
+  displayName: 'habit-app-feature-habits-screen',
   moduleFileExtensions: ['ts', 'js', 'html', 'tsx', 'jsx'],
   preset: 'react-native',
   resolver: '@nrwl/jest/plugins/resolver',

@@ -28,6 +28,7 @@
     "@react-native-community/cli-platform-android": "6.0.0",
     "@react-native-community/cli-platform-ios": "6.0.0",
     "@testing-library/jest-dom": "5.14.1",
+    "@testing-library/jest-native": "4.0.2",
     "@testing-library/react-native": "^8.0.0",
     "@types/detox": "17.14.2",
     "@types/jest": "26.0.24",

@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nx-anlitz/habit-app/feature/habits-screen": [
+        "libs/habit-app/feature/habits-screen/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
