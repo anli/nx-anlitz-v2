@@ -1,3 +1,4 @@
+import { HabitCreateScreen } from '@nx-anlitz/habit-app/feature/habit-create-screen';
 import { HabitsScreen } from '@nx-anlitz/habit-app/feature/habits-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -14,6 +15,11 @@ export const App = () => (
           name="HabitsScreen"
           component={HabitsScreen.Component}
           options={HabitsScreen.options}
+        />
+        <Stack.Screen
+          name="HabitCreateScreen"
+          component={HabitCreateScreen.Component}
+          options={HabitCreateScreen.options}
         />
       </Stack.Navigator>
     </NavigationContainer>

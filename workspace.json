@@ -113,7 +113,10 @@
           },
           "configurations": {
             "production": {
-              "detoxConfiguration": "ios.sim.release"
+              "detoxConfiguration": "ios.sim.release",
+              "loglevel": "verbose",
+              "artifactsLocation": "./../../artifacts/",
+              "recordVideos": "failing"
             }
           }
         },
@@ -135,7 +138,10 @@
           },
           "configurations": {
             "production": {
-              "detoxConfiguration": "android.emu.release"
+              "detoxConfiguration": "android.emu.release",
+              "loglevel": "verbose",
+              "artifactsLocation": "./../../artifacts/",
+              "recordVideos": "failing"
             }
           }
         },
@@ -148,6 +154,40 @@
             "lintFilePatterns": [
               "apps/habit-app-e2e/**/*.{ts,tsx,js,jsx}"
             ]
+          }
+        }
+      }
+    },
+    "habit-app-feature-habit-create-screen": {
+      "root": "libs/habit-app/feature/habit-create-screen",
+      "sourceRoot": "libs/habit-app/feature/habit-create-screen/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/habit-app/feature/habit-create-screen/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/habit-app/feature/habit-create-screen"
+          ],
+          "options": {
+            "jestConfig": "libs/habit-app/feature/habit-create-screen/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs/habit-app/feature/habits-create-screen"
+            }
           }
         }
       }

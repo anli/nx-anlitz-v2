@@ -84,3 +84,8 @@ jobs:
       - name: Test iOS app
         run: |
           npm run e2e-test-ios -- --configuration=production --base=origin/$GITHUB_BASE_REF --cleanup
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: failing-tests-videos
+          path: artifacts/
