@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-native/Libraries/Utilities/Appearance.js b/node_modules/react-native/Libraries/Utilities/Appearance.js
+index ea4c26a..8a57d83 100644
+--- a/node_modules/react-native/Libraries/Utilities/Appearance.js
++++ b/node_modules/react-native/Libraries/Utilities/Appearance.js
+@@ -96,6 +96,6 @@ module.exports = {
+    */
+   removeChangeListener(listener: AppearanceListener): void {
+     // NOTE: This will report a deprecation notice via `console.error`.
+-    eventEmitter.removeListener('change', listener);
++    eventEmitter.remove('change', listener);
+   },
+ };

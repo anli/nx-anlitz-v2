@@ -8,3 +8,8 @@ jest.mock('@react-navigation/native/lib/commonjs/useLinking.native', () => ({
   default: () => ({ getInitialState: { then: jest.fn() } }),
   __esModule: true,
 }));
+
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+
+// https://github.com/facebook/react-native/issues/29849
+jest.mock('react-native/Libraries/LogBox/LogBox');
