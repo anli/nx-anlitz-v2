@@ -5,12 +5,13 @@
   "dependencies": {
     "@react-navigation/native": "*",
     "@react-navigation/native-stack": "*",
+    "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
-    "react-test-renderer": "*",
     "react": "*",
     "react-native": "*",
+    "react-native-paper": "*",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
-    "@testing-library/jest-native": "*"
+    "react-test-renderer": "*"
   }
 }
