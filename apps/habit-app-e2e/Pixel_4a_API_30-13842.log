@@ -1,0 +1,9 @@
+2021-10-28 01:26:49.229 bluetooth - /Volumes/Android/buildbot/src/android/emu-master-dev/system/bt/vendor_libs/test_vendor_lib/model/setup/device_boutique.cc:33 - Register: Registering beacon
+2021-10-28 01:26:49.229 bluetooth - /Volumes/Android/buildbot/src/android/emu-master-dev/system/bt/vendor_libs/test_vendor_lib/model/setup/device_boutique.cc:33 - Register: Registering beacon_swarm
+2021-10-28 01:26:49.229 bluetooth - /Volumes/Android/buildbot/src/android/emu-master-dev/system/bt/vendor_libs/test_vendor_lib/model/setup/device_boutique.cc:33 - Register: Registering car_kit
+2021-10-28 01:26:49.229 bluetooth - /Volumes/Android/buildbot/src/android/emu-master-dev/system/bt/vendor_libs/test_vendor_lib/model/setup/device_boutique.cc:33 - Register: Registering classic
+2021-10-28 01:26:49.229 bluetooth - /Volumes/Android/buildbot/src/android/emu-master-dev/system/bt/vendor_libs/test_vendor_lib/model/setup/device_boutique.cc:33 - Register: Registering keyboard
+2021-10-28 01:26:49.229 bluetooth - /Volumes/Android/buildbot/src/android/emu-master-dev/system/bt/vendor_libs/test_vendor_lib/model/setup/device_boutique.cc:33 - Register: Registering remote_loopback
+2021-10-28 01:26:49.229 bluetooth - /Volumes/Android/buildbot/src/android/emu-master-dev/system/bt/vendor_libs/test_vendor_lib/model/setup/device_boutique.cc:33 - Register: Registering scripted_beacon
+2021-10-28 01:26:49.229 bluetooth - /Volumes/Android/buildbot/src/android/emu-master-dev/system/bt/vendor_libs/test_vendor_lib/model/setup/device_boutique.cc:33 - Register: Registering sniffer
+handleCpuAcceleration: feature check for hvf

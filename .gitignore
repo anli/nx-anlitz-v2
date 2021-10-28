@@ -95,7 +95,7 @@ buck-out/
 
 node_modules/
 
-apps/habit-app-e2e/artifacts
+**/artifacts
 
 **/coverage
 **/node_modules

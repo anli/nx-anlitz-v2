@@ -13,3 +13,8 @@ jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
 // https://github.com/facebook/react-native/issues/29849
 jest.mock('react-native/Libraries/LogBox/LogBox');
+
+jest.mock('react-hook-form', () => {
+  (global as any).window = {};
+  return jest.requireActual('react-hook-form');
+});
