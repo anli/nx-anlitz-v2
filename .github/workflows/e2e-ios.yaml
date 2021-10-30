@@ -19,9 +19,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 2
-      - name: Setup env
+      - name: Setup git
         run: |
           git fetch origin $GITHUB_BASE_REF
+      - name: Create env file
+        run: |
+          touch apps/habit-app/.env
+          echo GRAPHQL_URL=${{ secrets.ENV_GRAPHQL_URL }} >> .env
+          cat .env
+      - name: Setup detox
+        run: |
           brew tap wix/brew
           brew install applesimutils
       - name: Install the Apple certificate and provisioning profile

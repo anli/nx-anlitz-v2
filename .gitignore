@@ -102,3 +102,5 @@ node_modules/
 
 **/fastlane/README.md
 **/fastlane/report.xml
+
+**/.env
