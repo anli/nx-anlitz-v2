@@ -90,6 +90,40 @@
         }
       }
     },
+    "habit-app-data-access-habit": {
+      "root": "libs/habit-app/data-access/habit",
+      "sourceRoot": "libs/habit-app/data-access/habit/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/habit-app/data-access/habit/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/habit-app/data-access/habit"
+          ],
+          "options": {
+            "jestConfig": "libs/habit-app/data-access/habit/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs/habit-app/data-access/habit"
+            }
+          }
+        }
+      }
+    },
     "habit-app-e2e": {
       "root": "apps/habit-app-e2e",
       "sourceRoot": "apps/habit-app-e2e/src",

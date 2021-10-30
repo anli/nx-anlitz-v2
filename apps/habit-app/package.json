@@ -3,17 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@apollo/client": "*",
     "@react-navigation/native": "*",
     "@react-navigation/native-stack": "*",
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
+    "faker": "*",
     "react": "*",
+    "react-hook-form": "*",
     "react-native": "*",
     "react-native-paper": "*",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
     "react-test-renderer": "*",
-    "faker": "*",
-    "react-hook-form": "*"
+    "react-native-dotenv": "*"
   }
 }

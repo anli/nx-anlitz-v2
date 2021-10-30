@@ -31,6 +31,9 @@
     "habit-app": {
       "tags": []
     },
+    "habit-app-data-access-habit": {
+      "tags": []
+    },
     "habit-app-e2e": {
       "tags": [],
       "implicitDependencies": ["habit-app"]

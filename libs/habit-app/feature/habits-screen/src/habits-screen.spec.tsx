@@ -1,8 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { fireEvent, render, waitFor } from '@testing-library/react-native';
+import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 import React from 'react';
 import { HabitsScreen } from './habits-screen';
+import { MockedProvider } from '@apollo/client/testing';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import {
+  MockHasData,
+  MockNoData,
+} from '@nx-anlitz/habit-app/data-access/habit';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,18 +24,24 @@ jest.mock('@react-navigation/native', () => {
 });
 
 describe('Habits Screen', () => {
-  it('No habits', () => {
+  it('No habits', async () => {
     const { getByText, getByTestId } = render(
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Screen"
-            component={HabitsScreen.Component}
-            options={HabitsScreen.options}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <MockedProvider mocks={MockNoData} addTypename={false}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Screen"
+              component={HabitsScreen.Component}
+              options={HabitsScreen.options}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
     );
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
     expect(
       getByText('You have no habits. Press + to create one')
     ).toBeDefined();
@@ -38,20 +50,51 @@ describe('Habits Screen', () => {
 
   it('Create Habit', async () => {
     const { getByTestId } = render(
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Screen"
-            component={HabitsScreen.Component}
-            options={HabitsScreen.options}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <MockedProvider mocks={MockNoData} addTypename={false}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Screen"
+              component={HabitsScreen.Component}
+              options={HabitsScreen.options}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
     );
 
-    fireEvent.press(getByTestId('CreateHabitButton'));
-    await waitFor(() => expect(mockNavigate).toBeCalledTimes(1));
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
 
+    fireEvent.press(getByTestId('CreateHabitButton'));
+
+    expect(mockNavigate).toBeCalledTimes(1);
     expect(mockNavigate).toBeCalledWith('HabitCreateScreen');
+  });
+
+  it('Has habits', async () => {
+    const { getByText, queryByText } = render(
+      <MockedProvider mocks={MockHasData} addTypename={false}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Screen"
+              component={HabitsScreen.Component}
+              options={HabitsScreen.options}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
+    );
+    expect(
+      getByText('You have no habits. Press + to create one')
+    ).toBeDefined();
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    expect(queryByText('You have no habits. Press + to create one')).toBeNull();
   });
 });

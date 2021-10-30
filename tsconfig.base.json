@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nx-anlitz/habit-app/data-access/habit": [
+        "libs/habit-app/data-access/habit/src/index.ts"
+      ],
       "@nx-anlitz/habit-app/feature/habit-create-screen": [
         "libs/habit-app/feature/habit-create-screen/src/index.ts"
       ],

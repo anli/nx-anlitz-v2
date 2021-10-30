@@ -4,8 +4,10 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
-import { FAB } from 'react-native-paper';
+import { FlatList, SafeAreaView, Text } from 'react-native';
+import { FAB, List } from 'react-native-paper';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { useHabits } from '@nx-anlitz/habit-app/data-access/habit';
 
 const Component = () => {
   const { navigate } = useNavigation<
@@ -16,14 +18,26 @@ const Component = () => {
       'HabitCreateScreen'
     >
   >();
+  const { data } = useHabits();
 
-  const onCreateHabit = () => {
+  const handleCreateHabit = () => {
     navigate('HabitCreateScreen');
   };
 
   return (
     <SafeAreaView testID="HabitsScreen" style={{ flex: 1 }}>
-      <Text>You have no habits. Press + to create one</Text>
+      {data && (
+        <FlatList
+          data={data}
+          renderItem={({ item: { id, name } }) => (
+            <List.Item key={`${id}`} title={name} />
+          )}
+          keyExtractor={({ id }) => `${id}`}
+          ListEmptyComponent={
+            <Text>You have no habits. Press + to create one</Text>
+          }
+        />
+      )}
       <FAB
         testID="CreateHabitButton"
         style={{
@@ -32,7 +46,7 @@ const Component = () => {
           right: 0,
           bottom: 0,
         }}
-        onPress={onCreateHabit}
+        onPress={handleCreateHabit}
         icon="plus"
       />
     </SafeAreaView>
