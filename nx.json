@@ -46,6 +46,9 @@
     },
     "habit-app-utils-graphql-types": {
       "tags": []
+    },
+    "shared-utils-apollo-provider": {
+      "tags": []
     }
   }
 }

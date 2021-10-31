@@ -1,4 +1,4 @@
-query Habits {
+subscription Habits {
   getUser(id: "alice@anlitz.com") {
     habits {
       id

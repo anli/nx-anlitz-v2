@@ -26,6 +26,9 @@
       ],
       "@nx-anlitz/habit-app/utils/graphql-types": [
         "libs/habit-app/utils/graphql-types/src/index.ts"
+      ],
+      "@nx-anlitz/shared/utils/apollo-provider": [
+        "libs/shared/utils/apollo-provider/src/index.ts"
       ]
     }
   },

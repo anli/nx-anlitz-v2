@@ -462,6 +462,52 @@ export type StringTermFilter = {
   anyofterms?: Maybe<Scalars['String']>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  aggregateHabit?: Maybe<HabitAggregateResult>;
+  aggregateUser?: Maybe<UserAggregateResult>;
+  getHabit?: Maybe<Habit>;
+  getUser?: Maybe<User>;
+  queryHabit?: Maybe<Array<Maybe<Habit>>>;
+  queryUser?: Maybe<Array<Maybe<User>>>;
+};
+
+
+export type SubscriptionAggregateHabitArgs = {
+  filter?: Maybe<HabitFilter>;
+};
+
+
+export type SubscriptionAggregateUserArgs = {
+  filter?: Maybe<UserFilter>;
+};
+
+
+export type SubscriptionGetHabitArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type SubscriptionGetUserArgs = {
+  id: Scalars['String'];
+};
+
+
+export type SubscriptionQueryHabitArgs = {
+  filter?: Maybe<HabitFilter>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<HabitOrder>;
+};
+
+
+export type SubscriptionQueryUserArgs = {
+  filter?: Maybe<UserFilter>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<UserOrder>;
+};
+
 export type UpdateHabitInput = {
   filter: HabitFilter;
   remove?: Maybe<HabitPatch>;

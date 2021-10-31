@@ -1,7 +1,7 @@
-import { useHabitsQuery } from './use-habits.generated';
+import { useHabitsSubscription } from './use-habits.generated';
 
 export const useHabits = () => {
-  const { loading, error, data: gqlData } = useHabitsQuery();
+  const { loading, error, data: gqlData } = useHabitsSubscription();
   const data = gqlData?.getUser?.habits || [];
 
   return { loading, error, data };
