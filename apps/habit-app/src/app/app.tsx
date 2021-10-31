@@ -1,6 +1,6 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { HabitCreateScreen } from '@nx-anlitz/habit-app/feature/habit-create-screen';
 import { HabitsScreen } from '@nx-anlitz/habit-app/feature/habits-screen';
+import { CustomApolloProvider } from '@nx-anlitz/shared/utils/apollo-provider';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
@@ -9,13 +9,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 
-const client = new ApolloClient({
-  uri: GRAPHQL_URL,
-  cache: new InMemoryCache(),
-});
-
 export const App = () => (
-  <ApolloProvider client={client}>
+  <CustomApolloProvider url={GRAPHQL_URL}>
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator>
@@ -32,5 +27,5 @@ export const App = () => (
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
-  </ApolloProvider>
+  </CustomApolloProvider>
 );

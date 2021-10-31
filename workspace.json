@@ -303,6 +303,40 @@
           }
         }
       }
+    },
+    "shared-utils-apollo-provider": {
+      "root": "libs/shared/utils/apollo-provider",
+      "sourceRoot": "libs/shared/utils/apollo-provider/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/utils/apollo-provider/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/utils/apollo-provider"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/utils/apollo-provider/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs/habit-app/feature/habits-screen"
+            }
+          }
+        }
+      }
     }
   },
   "cli": {
