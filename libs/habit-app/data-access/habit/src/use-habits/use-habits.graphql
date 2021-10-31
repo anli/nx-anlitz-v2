@@ -1,0 +1,8 @@
+query Habits {
+  getUser(id: "alice@anlitz.com") {
+    habits {
+      id
+      name
+    }
+  }
+}

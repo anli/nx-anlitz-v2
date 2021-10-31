@@ -1,14 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
-import React from 'react';
-import { HabitsScreen } from './habits-screen';
 import { MockedProvider } from '@apollo/client/testing';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import {
   MockHasData,
   MockNoData,
 } from '@nx-anlitz/habit-app/data-access/habit';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { act, fireEvent, render } from '@testing-library/react-native';
+import React from 'react';
+import { HabitsScreen } from './habits-screen';
 
 const Stack = createNativeStackNavigator();
 

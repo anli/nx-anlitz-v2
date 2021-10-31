@@ -1,8 +1,8 @@
-import { GET_HABITS } from './use-habits';
 import faker from 'faker';
+import { HabitsDocument } from './use-habits.generated';
 
 const request = {
-  query: GET_HABITS,
+  query: HabitsDocument,
 };
 
 export const habitsData = Array.from({ length: 3 }, (_, i) => {

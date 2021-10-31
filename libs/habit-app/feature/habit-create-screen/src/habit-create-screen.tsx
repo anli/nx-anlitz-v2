@@ -1,3 +1,4 @@
+import { useHabitCreate } from '@nx-anlitz/habit-app/data-access/habit';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import React from 'react';
@@ -10,13 +11,17 @@ type FormData = {
 };
 
 const Component = () => {
+  const userId = 'alice@anlitz.com';
   const { canGoBack, goBack } = useNavigation();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const onSubmit = (data: FormData) => {
+  const { mutate } = useHabitCreate();
+
+  const onSubmit = async (data: FormData) => {
+    await mutate({ ...data, userId });
     canGoBack() && goBack();
   };
 

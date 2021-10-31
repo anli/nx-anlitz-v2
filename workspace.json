@@ -259,6 +259,50 @@
           }
         }
       }
+    },
+    "habit-app-utils-graphql-types": {
+      "root": "libs/habit-app/utils/graphql-types",
+      "sourceRoot": "libs/habit-app/utils/graphql-types/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/habit-app/utils/graphql-types/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/habit-app/utils/graphql-types"
+          ],
+          "options": {
+            "jestConfig": "libs/habit-app/utils/graphql-types/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs/habit-app/feature/habits-screen"
+            }
+          }
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npx graphql-codegen --require dotenv/config --config libs/habit-app/utils/graphql-types/codegen.yml dotenv_config_path=libs/habit-app/utils/graphql-types/.env"
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
