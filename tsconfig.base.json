@@ -23,6 +23,9 @@
       ],
       "@nx-anlitz/habit-app/feature/habits-screen": [
         "libs/habit-app/feature/habits-screen/src/index.ts"
+      ],
+      "@nx-anlitz/habit-app/utils/graphql-types": [
+        "libs/habit-app/utils/graphql-types/src/index.ts"
       ]
     }
   },

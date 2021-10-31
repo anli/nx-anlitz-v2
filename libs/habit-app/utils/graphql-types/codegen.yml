@@ -1,0 +1,20 @@
+overwrite: true
+schema: ${GRAPHQL_SCHEMA_URL}
+documents:
+  - 'libs/habit-app/**/*.graphql'
+generates:
+  libs/habit-app/utils/graphql-types/src/graphql-types.generated.ts:
+    - typescript
+  libs/habit-app:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.tsx
+      baseTypesPath: ~@nx-anlitz/habit-app/utils/graphql-types
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      enumsAsConst: true
+      withHOC: false
+      withHooks: true
+      withComponent: false

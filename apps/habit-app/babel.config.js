@@ -8,4 +8,9 @@ module.exports = {
       },
     ],
   ],
+  env: {
+    test: {
+      plugins: [['module:react-native-dotenv']],
+    },
+  },
 };

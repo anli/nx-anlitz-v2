@@ -1,3 +1,4 @@
+import { MockedProvider } from '@apollo/client/testing';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
@@ -22,15 +23,17 @@ jest.mock('@react-navigation/native', () => {
 describe('Habit Create Screen', () => {
   it('No input', () => {
     const { getByTestId } = render(
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Screen"
-            component={HabitCreateScreen.Component}
-            options={HabitCreateScreen.options}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <MockedProvider mocks={[]} addTypename={false}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Screen"
+              component={HabitCreateScreen.Component}
+              options={HabitCreateScreen.options}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
     );
     expect(getByTestId('NameInput')).toBeDefined();
     expect(getByTestId('CreateHabitButton')).toBeDefined();
@@ -38,15 +41,17 @@ describe('Habit Create Screen', () => {
 
   it('Submit with errors', async () => {
     const { getByTestId, findByText } = render(
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Screen"
-            component={HabitCreateScreen.Component}
-            options={HabitCreateScreen.options}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <MockedProvider mocks={[]} addTypename={false}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Screen"
+              component={HabitCreateScreen.Component}
+              options={HabitCreateScreen.options}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
     );
 
     fireEvent.press(getByTestId('CreateHabitButton'));
@@ -55,16 +60,18 @@ describe('Habit Create Screen', () => {
   });
 
   it('Submit', async () => {
-    const { getByTestId, findByText } = render(
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Screen"
-            component={HabitCreateScreen.Component}
-            options={HabitCreateScreen.options}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+    const { getByTestId } = render(
+      <MockedProvider mocks={[]} addTypename={false}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Screen"
+              component={HabitCreateScreen.Component}
+              options={HabitCreateScreen.options}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
     );
 
     fireEvent.changeText(getByTestId('NameInput'), lorem.word());

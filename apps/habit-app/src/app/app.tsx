@@ -1,12 +1,11 @@
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { HabitCreateScreen } from '@nx-anlitz/habit-app/feature/habit-create-screen';
 import { HabitsScreen } from '@nx-anlitz/habit-app/feature/habits-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { Provider as PaperProvider } from 'react-native-paper';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { GRAPHQL_URL } from 'react-native-dotenv';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 

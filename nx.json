@@ -43,6 +43,9 @@
     },
     "habit-app-feature-habits-screen": {
       "tags": []
+    },
+    "habit-app-utils-graphql-types": {
+      "tags": []
     }
   }
 }
