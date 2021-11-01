@@ -21,11 +21,17 @@
       "@nx-anlitz/habit-app/feature/habit-create-screen": [
         "libs/habit-app/feature/habit-create-screen/src/index.ts"
       ],
+      "@nx-anlitz/habit-app/feature/habit-view-screen": [
+        "libs/habit-app/feature/habit-view-screen/src/index.ts"
+      ],
       "@nx-anlitz/habit-app/feature/habits-screen": [
         "libs/habit-app/feature/habits-screen/src/index.ts"
       ],
       "@nx-anlitz/habit-app/utils/graphql-types": [
         "libs/habit-app/utils/graphql-types/src/index.ts"
+      ],
+      "@nx-anlitz/habit-app/utils/navigation-types": [
+        "libs/habit-app/utils/navigation-types/src/index.ts"
       ],
       "@nx-anlitz/shared/utils/apollo-provider": [
         "libs/shared/utils/apollo-provider/src/index.ts"

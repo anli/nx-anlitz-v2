@@ -21,6 +21,10 @@ jest.mock('@react-navigation/native', () => {
 });
 
 describe('Habit Create Screen', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('No input', () => {
     const { getByTestId } = render(
       <MockedProvider mocks={[]} addTypename={false}>

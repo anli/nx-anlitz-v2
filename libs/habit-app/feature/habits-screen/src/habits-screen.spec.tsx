@@ -1,5 +1,6 @@
 import { MockedProvider } from '@apollo/client/testing';
 import {
+  habitsData,
   MockHasData,
   MockNoData,
 } from '@nx-anlitz/habit-app/data-access/habit';
@@ -23,6 +24,10 @@ jest.mock('@react-navigation/native', () => {
 });
 
 describe('Habits Screen', () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('No habits', async () => {
     const { getByText, getByTestId } = render(
       <MockedProvider mocks={MockNoData} addTypename={false}>
@@ -95,5 +100,32 @@ describe('Habits Screen', () => {
     });
 
     expect(queryByText('You have no habits. Press + to create one')).toBeNull();
+  });
+
+  it('View Habit', async () => {
+    const { getByText } = render(
+      <MockedProvider mocks={MockHasData} addTypename={false}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Screen"
+              component={HabitsScreen.Component}
+              options={HabitsScreen.options}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
+    );
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    fireEvent.press(getByText(habitsData.find(Boolean)?.name || ''));
+
+    expect(mockNavigate).toBeCalledTimes(1);
+    expect(mockNavigate).toBeCalledWith('HabitViewScreen', {
+      id: habitsData.find(Boolean)?.id,
+    });
   });
 });

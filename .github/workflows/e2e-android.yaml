@@ -40,6 +40,10 @@ jobs:
       - name: Install app node modules
         run: |
           npx nx ensure-symlink
+      - name: Clean gradle
+        run: |
+          cd apps/habit-app/android
+          ./gradlew clean
       - name: Build Android app
         run: |
           npm run e2e-build-android -- --configuration=production --base=origin/$GITHUB_BASE_REF

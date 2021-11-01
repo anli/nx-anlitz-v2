@@ -1,0 +1,6 @@
+subscription Habit($id: ID!) {
+  getHabit(id: $id) {
+    name
+    id
+  }
+}

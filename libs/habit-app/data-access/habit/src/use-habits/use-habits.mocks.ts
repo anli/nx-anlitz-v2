@@ -9,7 +9,7 @@ export const habitsData = Array.from({ length: 3 }, (_, i) => {
   faker.seed(i);
   return {
     id: faker.datatype.uuid(),
-    name: faker.name.firstName(),
+    name: faker.lorem.word(),
   };
 });
 
