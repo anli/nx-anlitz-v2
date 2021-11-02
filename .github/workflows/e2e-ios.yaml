@@ -72,14 +72,7 @@ jobs:
       - name: Install app node modules
         run: |
           npx nx ensure-symlink
-      - name: Cache Pods
-        id: cache-pods
-        uses: actions/cache@v2
-        with:
-          path: apps/habit-app/ios/Pods
-          key: pods-${{ hashFiles('apps/habit-app/ios/Podfile.lock') }}
       - name: Install Pods
-        if: steps.cache-pods.outputs.cache-hit != 'true'
         run: |
           npx pod-install apps/habit-app/ios
       - name: Rebuild detox

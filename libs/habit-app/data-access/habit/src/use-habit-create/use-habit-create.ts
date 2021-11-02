@@ -2,7 +2,7 @@ import { AddHabitInput } from '@nx-anlitz/habit-app/utils/graphql-types';
 import { useHabitCreateMutation } from './use-habit-create.generated';
 
 export const useHabitCreate = () => {
-  const [addHabit, { data: gqlData, loading, error }] =
+  const [habitCreate, { data: gqlData, loading, error }] =
     useHabitCreateMutation();
   const data = gqlData?.addHabit?.numUids;
 
@@ -10,7 +10,7 @@ export const useHabitCreate = () => {
     name,
     userId,
   }: Pick<AddHabitInput, 'name' | 'userId'>) => {
-    addHabit({
+    habitCreate({
       variables: {
         input: {
           name,

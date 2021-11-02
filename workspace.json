@@ -226,6 +226,40 @@
         }
       }
     },
+    "habit-app-feature-habit-view-screen": {
+      "root": "libs/habit-app/feature/habit-view-screen",
+      "sourceRoot": "libs/habit-app/feature/habit-view-screen/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/habit-app/feature/habit-view-screen/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/habit-app/feature/habit-view-screen"
+          ],
+          "options": {
+            "jestConfig": "libs/habit-app/feature/habit-view-screen/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs/habit-app/feature/habit-view-screen"
+            }
+          }
+        }
+      }
+    },
     "habit-app-feature-habits-screen": {
       "root": "libs/habit-app/feature/habits-screen",
       "sourceRoot": "libs/habit-app/feature/habits-screen/src",
@@ -288,7 +322,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs/habit-app/feature/habits-screen"
+              "coverageDirectory": "coverage/libs/habit-app/utils/graphql-types"
             }
           }
         },
@@ -300,6 +334,40 @@
                 "command": "npx graphql-codegen --require dotenv/config --config libs/habit-app/utils/graphql-types/codegen.yml dotenv_config_path=libs/habit-app/utils/graphql-types/.env"
               }
             ]
+          }
+        }
+      }
+    },
+    "habit-app-utils-navigation-types": {
+      "root": "libs/habit-app/utils/navigation-types",
+      "sourceRoot": "libs/habit-app/utils/navigation-types/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/habit-app/utils/navigation-types/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/habit-app/utils/navigation-types"
+          ],
+          "options": {
+            "jestConfig": "libs/habit-app/utils/navigation-types/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs/habit-app/utils/navigation-types"
+            }
           }
         }
       }
@@ -332,7 +400,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs/habit-app/feature/habits-screen"
+              "coverageDirectory": "coverage/libs/shared/utils/apollo-provider"
             }
           }
         }

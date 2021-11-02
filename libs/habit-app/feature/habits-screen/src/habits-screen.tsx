@@ -1,3 +1,5 @@
+import { useHabits } from '@nx-anlitz/habit-app/data-access/habit';
+import { RootStackParamList } from '@nx-anlitz/habit-app/utils/navigation-types';
 import { useNavigation } from '@react-navigation/native';
 import {
   NativeStackNavigationOptions,
@@ -6,22 +8,18 @@ import {
 import React from 'react';
 import { FlatList, SafeAreaView, Text } from 'react-native';
 import { FAB, List } from 'react-native-paper';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { useHabits } from '@nx-anlitz/habit-app/data-access/habit';
 
 const Component = () => {
-  const { navigate } = useNavigation<
-    NativeStackNavigationProp<
-      {
-        HabitCreateScreen: undefined;
-      },
-      'HabitCreateScreen'
-    >
-  >();
+  const { navigate } =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { data } = useHabits();
 
   const handleCreateHabit = () => {
     navigate('HabitCreateScreen');
+  };
+
+  const handleViewHabit = (id: string) => {
+    navigate('HabitViewScreen', { id });
   };
 
   return (
@@ -30,7 +28,11 @@ const Component = () => {
         <FlatList
           data={data}
           renderItem={({ item: { id, name } }) => (
-            <List.Item key={`${id}`} title={name} />
+            <List.Item
+              key={`${id}`}
+              title={name}
+              onPress={() => handleViewHabit(id)}
+            />
           )}
           keyExtractor={({ id }) => `${id}`}
           ListEmptyComponent={

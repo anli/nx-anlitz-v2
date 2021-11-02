@@ -41,10 +41,16 @@
     "habit-app-feature-habit-create-screen": {
       "tags": []
     },
+    "habit-app-feature-habit-view-screen": {
+      "tags": []
+    },
     "habit-app-feature-habits-screen": {
       "tags": []
     },
     "habit-app-utils-graphql-types": {
+      "tags": []
+    },
+    "habit-app-utils-navigation-types": {
       "tags": []
     },
     "shared-utils-apollo-provider": {
