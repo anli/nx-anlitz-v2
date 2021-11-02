@@ -84,7 +84,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/apps/habit"
+              "coverageDirectory": "coverage/apps-habit"
             }
           }
         }
@@ -118,7 +118,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs/habit-app/data-access/habit"
+              "coverageDirectory": "coverage/libs-habit-app-data-access-habit"
             }
           }
         }
@@ -220,7 +220,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs/habit-app/feature/habits-create-screen"
+              "coverageDirectory": "coverage/libs-habit-app-feature-habits-create-screen"
             }
           }
         }
@@ -254,7 +254,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs/habit-app/feature/habit-view-screen"
+              "coverageDirectory": "coverage/libs-habit-app-feature-habit-view-screen"
             }
           }
         }
@@ -288,7 +288,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs/habit-app/feature/habits-screen"
+              "coverageDirectory": "coverage/libs-habit-app-feature-habits-screen"
             }
           }
         }
@@ -322,7 +322,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs/habit-app/utils/graphql-types"
+              "coverageDirectory": "coverage/libs-habit-app-utils-graphql-types"
             }
           }
         },
@@ -366,7 +366,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs/habit-app/utils/navigation-types"
+              "coverageDirectory": "coverage/libs-habit-app-utils-navigation-types"
             }
           }
         }
@@ -400,7 +400,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs/shared/utils/apollo-provider"
+              "coverageDirectory": "coverage/libs-shared-utils-apollo-provider"
             }
           }
         }

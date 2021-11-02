@@ -35,6 +35,17 @@ jobs:
       - name: Run lint
         run: |
           npm run lint -- --base=origin/$GITHUB_BASE_REF
-      - name: Run tests
+      - name: Run affected tests
         run: |
-          npm run test -- --configuration=ci --base=origin/$GITHUB_BASE_REF
+          npm run test -- --base=origin/$GITHUB_BASE_REF
+      - name: Run all tests
+        run: |
+          npm run test-all -- --configuration=ci --base=origin/$GITHUB_BASE_REF
+      - name: Run test coverage check
+        run: |
+          npm run test-coverage
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: coverage
+          path: coverage/combine-coverage
