@@ -65,6 +65,7 @@ DerivedData
 **/android/**/.gradle
 **/android/**/local.properties
 **/android/**/*.iml
+**/android/java_*
 
 ## BUCK
 
@@ -104,3 +105,4 @@ node_modules/
 **/fastlane/report.xml
 
 **/.env
+

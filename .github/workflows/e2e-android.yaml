@@ -45,8 +45,13 @@ jobs:
           cd apps/habit-app/android
           ./gradlew clean
       - name: Build Android app
+        continue-on-error: true
         run: |
-          npm run e2e-build-android -- --configuration=production --base=origin/$GITHUB_BASE_REF
+          npm run e2e-build-android -- --configuration=production --base=origin/$GITHUB_BASE_REF --skip-nx-cache
+      - name: Rebuild Android app if failed
+        if: failure()
+        run: |
+          npm run e2e-build-android -- --configuration=production --base=origin/$GITHUB_BASE_REF --skip-nx-cache
       - name: Download Android emulator
         run: |
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-30;google_apis;x86"

@@ -1,4 +1,5 @@
 import { HabitCreateScreen } from '@nx-anlitz/habit-app/feature/habit-create-screen';
+import { HabitUpdateScreen } from '@nx-anlitz/habit-app/feature/habit-update-screen';
 import { HabitViewScreen } from '@nx-anlitz/habit-app/feature/habit-view-screen';
 import { HabitsScreen } from '@nx-anlitz/habit-app/feature/habits-screen';
 import { CustomApolloProvider } from '@nx-anlitz/shared/utils/apollo-provider';
@@ -29,6 +30,11 @@ export const App = () => (
             name="HabitViewScreen"
             component={HabitViewScreen.Component}
             options={HabitViewScreen.options}
+          />
+          <Stack.Screen
+            name="HabitUpdateScreen"
+            component={HabitUpdateScreen.Component}
+            options={HabitUpdateScreen.options}
           />
         </Stack.Navigator>
       </NavigationContainer>

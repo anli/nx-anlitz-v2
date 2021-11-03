@@ -35,12 +35,9 @@ jobs:
       - name: Run lint
         run: |
           npm run lint -- --base=origin/$GITHUB_BASE_REF
-      - name: Run affected tests
-        run: |
-          npm run test -- --base=origin/$GITHUB_BASE_REF
       - name: Run all tests
         run: |
-          npm run test-all -- --configuration=ci --base=origin/$GITHUB_BASE_REF
+          npm run test-all -- --configuration=ci --base=origin/$GITHUB_BASE_REF --skip-nx-cache
       - name: Run test coverage check
         run: |
           npm run test-coverage
