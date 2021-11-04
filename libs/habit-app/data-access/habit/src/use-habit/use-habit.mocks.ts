@@ -1,4 +1,5 @@
 import faker from 'faker';
+import { HabitNonSubscriptionDocument } from './use-habit-non-subscription.generated';
 import { HabitDocument } from './use-habit.generated';
 
 faker.seed(0);
@@ -17,6 +18,15 @@ const request = {
 export const habitMockHasData = [
   {
     request,
+    result: {
+      data: { getHabit: habitData },
+    },
+  },
+];
+
+export const habitNonSubscriptionMockHasData = [
+  {
+    request: { ...request, query: HabitNonSubscriptionDocument },
     result: {
       data: { getHabit: habitData },
     },

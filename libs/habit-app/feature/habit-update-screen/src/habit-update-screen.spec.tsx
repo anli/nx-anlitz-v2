@@ -1,68 +1,46 @@
 import { MockedProvider } from '@apollo/client/testing';
 import {
   habitData,
-  habitDeleteMockSuccess,
-  habitMockHasData,
+  habitNonSubscriptionMockHasData,
 } from '@nx-anlitz/habit-app/data-access/habit';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { act, fireEvent, render } from '@testing-library/react-native';
+import { lorem } from 'faker';
 import React from 'react';
-import { HabitViewScreen } from './habit-view-screen';
+import { HabitUpdateScreen } from './habit-update-screen';
 
 const Stack = createNativeStackNavigator();
 
 const mockGoBack = jest.fn();
-const mockNavigate = jest.fn();
 jest.mock('@react-navigation/native', () => {
   const module = jest.requireActual('@react-navigation/native');
   return {
     ...module,
     useNavigation: () => ({
-      ...module.useNavigation(),
       canGoBack: jest.fn().mockReturnValue(true),
       goBack: mockGoBack,
-      navigate: mockNavigate,
     }),
   };
 });
 
 describe('Habit View Screen', () => {
-  it('See habit information', async () => {
-    const { getByText } = render(
-      <MockedProvider mocks={habitMockHasData} addTypename={false}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Screen"
-              component={HabitViewScreen.Component}
-              options={HabitViewScreen.options}
-              initialParams={{ id: habitData.id }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </MockedProvider>
-    );
-
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    expect(getByText(habitData.name)).toBeDefined();
+  beforeEach(() => {
+    jest.resetAllMocks();
   });
 
-  it('Delete a habit', async () => {
+  it('Has data', async () => {
     const { getByTestId } = render(
       <MockedProvider
-        mocks={[...habitMockHasData, ...habitDeleteMockSuccess]}
+        mocks={habitNonSubscriptionMockHasData}
         addTypename={false}
       >
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
               name="Screen"
-              component={HabitViewScreen.Component}
-              options={HabitViewScreen.options}
+              component={HabitUpdateScreen.Component}
+              options={HabitUpdateScreen.options}
               initialParams={{ id: habitData.id }}
             />
           </Stack.Navigator>
@@ -74,44 +52,74 @@ describe('Habit View Screen', () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
-    fireEvent.press(getByTestId('HabitDeleteButton'));
+    expect(getByTestId('NameInput')).toBeDefined();
+    expect(getByTestId('NameInput').props.value).toEqual(habitData.name);
+    expect(getByTestId('UpdateHabitButton')).toBeDefined();
+  });
+
+  it('Submit with errors', async () => {
+    const { getByTestId, getByText } = render(
+      <MockedProvider
+        mocks={habitNonSubscriptionMockHasData}
+        addTypename={false}
+      >
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Screen"
+              component={HabitUpdateScreen.Component}
+              options={HabitUpdateScreen.options}
+              initialParams={{ id: habitData.id }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
+    );
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    fireEvent.changeText(getByTestId('NameInput'), '');
+    fireEvent.press(getByTestId('UpdateHabitButton'));
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    expect(getByText('Habit Name is required.')).toBeDefined();
+  });
+
+  it('Submit', async () => {
+    const { getByTestId } = render(
+      <MockedProvider
+        mocks={[...habitNonSubscriptionMockHasData]}
+        addTypename={false}
+      >
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Screen"
+              component={HabitUpdateScreen.Component}
+              options={HabitUpdateScreen.options}
+              initialParams={{ id: habitData.id }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </MockedProvider>
+    );
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    fireEvent.changeText(getByTestId('NameInput'), lorem.word());
+    fireEvent.press(getByTestId('UpdateHabitButton'));
 
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
 
     expect(mockGoBack).toBeCalledTimes(1);
-  });
-
-  it('Update a habit', async () => {
-    const { getByTestId } = render(
-      <MockedProvider mocks={habitMockHasData} addTypename={false}>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Screen"
-              component={HabitViewScreen.Component}
-              options={HabitViewScreen.options}
-              initialParams={{ id: habitData.id }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </MockedProvider>
-    );
-
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    fireEvent.press(getByTestId('HabitUpdateButton'));
-
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    expect(mockNavigate).toBeCalledTimes(1);
-    expect(mockNavigate).toBeCalledWith('HabitUpdateScreen', {
-      id: habitData.id,
-    });
   });
 });

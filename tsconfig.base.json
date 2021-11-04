@@ -21,6 +21,9 @@
       "@nx-anlitz/habit-app/feature/habit-create-screen": [
         "libs/habit-app/feature/habit-create-screen/src/index.ts"
       ],
+      "@nx-anlitz/habit-app/feature/habit-update-screen": [
+        "libs/habit-app/feature/habit-update-screen/src/index.ts"
+      ],
       "@nx-anlitz/habit-app/feature/habit-view-screen": [
         "libs/habit-app/feature/habit-view-screen/src/index.ts"
       ],

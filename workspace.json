@@ -69,7 +69,8 @@
           "options": {
             "lintFilePatterns": [
               "apps/habit-app/**/*.{ts,tsx,js,jsx}"
-            ]
+            ],
+            "maxWarnings": 0
           }
         },
         "test": {
@@ -103,7 +104,8 @@
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/data-access/habit/**/*.{ts,tsx,js,jsx}"
-            ]
+            ],
+            "maxWarnings": 0
           }
         },
         "test": {
@@ -187,7 +189,8 @@
           "options": {
             "lintFilePatterns": [
               "apps/habit-app-e2e/**/*.{ts,tsx,js,jsx}"
-            ]
+            ],
+            "maxWarnings": 0
           }
         }
       }
@@ -205,7 +208,8 @@
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/feature/habit-create-screen/**/*.{ts,tsx,js,jsx}"
-            ]
+            ],
+            "maxWarnings": 0
           }
         },
         "test": {
@@ -220,7 +224,42 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/libs-habit-app-feature-habits-create-screen"
+              "coverageDirectory": "coverage/libs-habit-app-feature-habit-create-screen"
+            }
+          }
+        }
+      }
+    },
+    "habit-app-feature-habit-update-screen": {
+      "root": "libs/habit-app/feature/habit-update-screen",
+      "sourceRoot": "libs/habit-app/feature/habit-update-screen/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/habit-app/feature/habit-update-screen/**/*.{ts,tsx,js,jsx}"
+            ],
+            "maxWarnings": 0
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/habit-app/feature/habit-update-screen"
+          ],
+          "options": {
+            "jestConfig": "libs/habit-app/feature/habit-update-screen/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs-habit-app-feature-habit-update-screen"
             }
           }
         }
@@ -239,7 +278,8 @@
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/feature/habit-view-screen/**/*.{ts,tsx,js,jsx}"
-            ]
+            ],
+            "maxWarnings": 0
           }
         },
         "test": {
@@ -273,7 +313,8 @@
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/feature/habits-screen/**/*.{ts,tsx,js,jsx}"
-            ]
+            ],
+            "maxWarnings": 0
           }
         },
         "test": {
@@ -307,7 +348,8 @@
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/utils/graphql-types/**/*.{ts,tsx,js,jsx}"
-            ]
+            ],
+            "maxWarnings": 0
           }
         },
         "test": {
@@ -351,7 +393,8 @@
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/utils/navigation-types/**/*.{ts,tsx,js,jsx}"
-            ]
+            ],
+            "maxWarnings": 0
           }
         },
         "test": {
@@ -385,7 +428,8 @@
           "options": {
             "lintFilePatterns": [
               "libs/shared/utils/apollo-provider/**/*.{ts,tsx,js,jsx}"
-            ]
+            ],
+            "maxWarnings": 0
           }
         },
         "test": {
