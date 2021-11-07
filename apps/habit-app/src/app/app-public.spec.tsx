@@ -8,13 +8,28 @@ jest.mock('@nx-anlitz/shared/utils/apollo-provider', () => ({
   CustomApolloProvider: ({ children }) => children,
 }));
 
+jest.mock('react-native-auth0', () => {
+  class auth0 {}
+
+  return { __esModule: true, default: auth0 };
+});
+
+jest.mock('@nx-anlitz/shared/auth', () => {
+  const module = jest.requireActual('@nx-anlitz/shared/auth');
+
+  return {
+    ...module,
+    useAuth: jest.fn().mockReturnValue({ isAuthenticated: false }),
+  };
+});
+
 describe('App', () => {
-  it('App is loaded', () => {
+  it('Public User', () => {
     const { getByTestId } = render(
       <MockedProvider mocks={[]} addTypename={false}>
         <App />
       </MockedProvider>
     );
-    expect(getByTestId('HabitsScreen')).toBeDefined();
+    expect(getByTestId('LoginScreen')).toBeDefined();
   });
 });
