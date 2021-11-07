@@ -48,10 +48,15 @@ jobs:
         continue-on-error: true
         run: |
           npm run e2e-build-android -- --configuration=production --base=origin/$GITHUB_BASE_REF --skip-nx-cache
+        env:
+          RN_SRC_EXT: e2e.ts
       - name: Rebuild Android app if failed
         if: failure()
+        continue-on-error: false
         run: |
           npm run e2e-build-android -- --configuration=production --base=origin/$GITHUB_BASE_REF --skip-nx-cache
+        env:
+          RN_SRC_EXT: e2e.ts
       - name: Download Android emulator
         run: |
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-30;google_apis;x86"
