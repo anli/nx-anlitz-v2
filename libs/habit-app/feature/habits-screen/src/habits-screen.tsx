@@ -1,6 +1,5 @@
 import { useHabits } from '@nx-anlitz/habit-app/data-access/habit';
 import { RootStackParamList } from '@nx-anlitz/habit-app/utils/navigation-types';
-import { useAuthentication } from '@nx-anlitz/shared/feature/authentication';
 import { useNavigation } from '@react-navigation/native';
 import {
   NativeStackNavigationOptions,
@@ -14,7 +13,7 @@ const Component = () => {
   const { navigate, setOptions } =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { data } = useHabits();
-  const { logout } = useAuthentication();
+  // const { logout } = useAuthentication();
 
   useLayoutEffect(() => {
     setOptions({
@@ -23,11 +22,14 @@ const Component = () => {
           testID="LogoutButton"
           icon="logout"
           size={24}
-          onPress={logout}
+          // onPress={logout}
         />
       ),
     });
-  }, [setOptions, logout]);
+  }, [
+    setOptions,
+    // logout
+  ]);
 
   const handleCreateHabit = () => {
     navigate('HabitCreateScreen');

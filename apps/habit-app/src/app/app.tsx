@@ -2,11 +2,7 @@ import { HabitCreateScreen } from '@nx-anlitz/habit-app/feature/habit-create-scr
 import { HabitUpdateScreen } from '@nx-anlitz/habit-app/feature/habit-update-screen';
 import { HabitViewScreen } from '@nx-anlitz/habit-app/feature/habit-view-screen';
 import { HabitsScreen } from '@nx-anlitz/habit-app/feature/habits-screen';
-import {
-  AuthenticationProvider,
-  LoginScreen,
-  useAuthentication,
-} from '@nx-anlitz/shared/feature/authentication';
+import { LoginScreen } from '@nx-anlitz/shared/feature/authentication';
 import { CustomApolloProvider } from '@nx-anlitz/shared/utils/apollo-provider';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -56,40 +52,40 @@ const AuthenticatedNavigator = () => {
 };
 
 export const Navigation = () => {
-  const { isAuthenticated } = useAuthentication();
+  // const { isAuthenticated } = useAuthentication();
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {isAuthenticated ? (
-          <Stack.Screen
-            name="AuthenticatedNavigator"
-            component={AuthenticatedNavigator}
-            options={{
-              headerShown: false,
-            }}
-          />
-        ) : (
+        {/* {isAuthenticated ? ( */}
+        <Stack.Screen
+          name="AuthenticatedNavigator"
+          component={AuthenticatedNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+        {/* ) : (
           <Stack.Screen
             name="PublicNavigator"
             component={PublicNavigator}
             options={{ headerShown: false }}
           />
-        )}
+        )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export const App = () => (
-  <AuthenticationProvider
-    clientId={Config.AUTHENTICATION_CLIENT_ID}
-    domain={Config.AUTHENTICATION_DOMAIN}
-  >
-    <CustomApolloProvider url={Config.GRAPHQL_URL}>
-      <PaperProvider>
-        <Navigation />
-      </PaperProvider>
-    </CustomApolloProvider>
-  </AuthenticationProvider>
+  // <AuthenticationProvider
+  //   clientId={Config.AUTHENTICATION_CLIENT_ID}
+  //   domain={Config.AUTHENTICATION_DOMAIN}
+  // >
+  <CustomApolloProvider url={Config.GRAPHQL_URL}>
+    <PaperProvider>
+      <Navigation />
+    </PaperProvider>
+  </CustomApolloProvider>
+  // </AuthenticationProvider>
 );
