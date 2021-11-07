@@ -16,6 +16,7 @@
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
     "react-test-renderer": "*",
-    "react-native-dotenv": "*"
+    "react-native-dotenv": "*",
+    "react-native-auth0": "*"
   }
 }

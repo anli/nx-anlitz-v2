@@ -56,6 +56,9 @@
     "habit-app-utils-navigation-types": {
       "tags": []
     },
+    "shared-auth": {
+      "tags": []
+    },
     "shared-utils-apollo-provider": {
       "tags": []
     }

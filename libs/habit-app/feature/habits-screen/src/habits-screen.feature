@@ -19,3 +19,8 @@ Feature: Habits Screen
     Given I am at the Habits Screen
     When I press first Habit
     Then I should see Habit View Screen
+
+  Scenario: Logout
+    Given I am at the Habits Screen
+    When I press Logout Button
+    Then I should be logged out
