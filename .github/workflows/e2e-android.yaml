@@ -44,7 +44,7 @@ jobs:
         run: |
           cd apps/habit-app/android
           ./gradlew clean
-          ./gradlew tasks
+          ./gradlew tasks --info
       - name: Build Android app
         run: |
           npm run e2e-build-android -- --configuration=production --base=origin/$GITHUB_BASE_REF --skip-nx-cache
