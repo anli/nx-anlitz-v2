@@ -12,10 +12,11 @@
     "react": "*",
     "react-hook-form": "*",
     "react-native": "*",
+    "react-native-auth0": "*",
     "react-native-paper": "*",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
     "react-test-renderer": "*",
-    "react-native-dotenv": "*"
+    "react-native-config": "*"
   }
 }

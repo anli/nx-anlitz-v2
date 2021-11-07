@@ -449,6 +449,40 @@
           }
         }
       }
+    },
+    "shared-feature-authentication": {
+      "root": "libs/shared/feature/authentication",
+      "sourceRoot": "libs/shared/feature/authentication/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/feature/authentication/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/feature/authentication"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/feature/authentication/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs-shared-feature-authentication"
+            }
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -1,18 +1,33 @@
 import { useHabits } from '@nx-anlitz/habit-app/data-access/habit';
 import { RootStackParamList } from '@nx-anlitz/habit-app/utils/navigation-types';
+import { useAuthentication } from '@nx-anlitz/shared/feature/authentication';
 import { useNavigation } from '@react-navigation/native';
 import {
   NativeStackNavigationOptions,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { FlatList, SafeAreaView, Text } from 'react-native';
-import { FAB, List } from 'react-native-paper';
+import { FAB, IconButton, List } from 'react-native-paper';
 
 const Component = () => {
-  const { navigate } =
+  const { navigate, setOptions } =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { data } = useHabits();
+  const { logout } = useAuthentication();
+
+  useLayoutEffect(() => {
+    setOptions({
+      headerRight: () => (
+        <IconButton
+          testID="LogoutButton"
+          icon="logout"
+          size={24}
+          onPress={logout}
+        />
+      ),
+    });
+  }, [setOptions, logout]);
 
   const handleCreateHabit = () => {
     navigate('HabitCreateScreen');

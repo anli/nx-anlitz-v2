@@ -36,6 +36,9 @@
       "@nx-anlitz/habit-app/utils/navigation-types": [
         "libs/habit-app/utils/navigation-types/src/index.ts"
       ],
+      "@nx-anlitz/shared/feature/authentication": [
+        "libs/shared/feature/authentication/src/index.ts"
+      ],
       "@nx-anlitz/shared/utils/apollo-provider": [
         "libs/shared/utils/apollo-provider/src/index.ts"
       ]

@@ -1,4 +1,6 @@
 const { withNxMetro } = require('@nrwl/react-native');
+const defaultSourceExts =
+  require('metro-config/src/defaults/defaults').sourceExts;
 
 module.exports = withNxMetro(
   {
@@ -9,6 +11,11 @@ module.exports = withNxMetro(
           inlineRequires: true,
         },
       }),
+    },
+    resolver: {
+      sourceExts: process.env.RN_SRC_EXT
+        ? process.env.RN_SRC_EXT.split(',').concat(defaultSourceExts)
+        : defaultSourceExts,
     },
   },
   {
