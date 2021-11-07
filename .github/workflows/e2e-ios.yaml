@@ -26,6 +26,8 @@ jobs:
         run: |
           touch apps/habit-app/.env
           echo GRAPHQL_URL=${{ secrets.ENV_GRAPHQL_URL }} >> .env
+          echo AUTHENTICATION_CLIENT_ID=${{ secrets.AUTHENTICATION_CLIENT_ID }} >> .env
+          echo AUTHENTICATION_DOMAIN=${{ secrets.AUTHENTICATION_DOMAIN }} >> .env
           cat .env
       - name: Setup detox
         run: |

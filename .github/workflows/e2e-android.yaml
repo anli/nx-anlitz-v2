@@ -26,6 +26,8 @@ jobs:
         run: |
           touch apps/habit-app/.env
           echo GRAPHQL_URL=${{ secrets.ENV_GRAPHQL_URL }} >> .env
+          echo AUTHENTICATION_CLIENT_ID=${{ secrets.ENV_AUTHENTICATION_CLIENT_ID }} >> .env
+          echo AUTHENTICATION_DOMAIN=${{ secrets.ENV_AUTHENTICATION_DOMAIN }} >> .env
           cat .env
       - uses: actions/setup-node@v2
       - name: Cache Node Modules
