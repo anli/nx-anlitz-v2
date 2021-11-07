@@ -81,8 +81,8 @@ jobs:
       - name: Build iOS app
         run: |
           npm run e2e-build-ios -- --configuration=production --base=origin/$GITHUB_BASE_REF
-        env:
-          RN_SRC_EXT: e2e.ts
+        # env:
+        #   RN_SRC_EXT: e2e.ts
       - name: Test iOS app
         run: |
           npm run e2e-test-ios -- --configuration=production --base=origin/$GITHUB_BASE_REF --cleanup
