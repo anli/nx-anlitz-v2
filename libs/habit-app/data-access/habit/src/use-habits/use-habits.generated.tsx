@@ -6,16 +6,14 @@ const defaultOptions =  {}
 export type HabitsSubscriptionVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type HabitsSubscription = { __typename?: 'Subscription', getUser?: { __typename?: 'User', habits?: Array<{ __typename?: 'Habit', id: string, name: string } | null | undefined> | null | undefined } | null | undefined };
+export type HabitsSubscription = { __typename?: 'Subscription', queryHabit?: Array<{ __typename?: 'Habit', id: string, name: string } | null | undefined> | null | undefined };
 
 
 export const HabitsDocument = gql`
     subscription Habits {
-  getUser(id: "alice@anlitz.com") {
-    habits {
-      id
-      name
-    }
+  queryHabit {
+    id
+    name
   }
 }
     `;

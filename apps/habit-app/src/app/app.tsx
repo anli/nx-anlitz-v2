@@ -56,28 +56,30 @@ const AuthenticatedNavigator = () => {
 };
 
 export const Navigation = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, idToken } = useAuth();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {isAuthenticated ? (
-          <Stack.Screen
-            name="AuthenticatedNavigator"
-            component={AuthenticatedNavigator}
-            options={{
-              headerShown: false,
-            }}
-          />
-        ) : (
-          <Stack.Screen
-            name="PublicNavigator"
-            component={PublicNavigator}
-            options={{ headerShown: false }}
-          />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <CustomApolloProvider url={GRAPHQL_URL} authToken={idToken}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {isAuthenticated ? (
+            <Stack.Screen
+              name="AuthenticatedNavigator"
+              component={AuthenticatedNavigator}
+              options={{
+                headerShown: false,
+              }}
+            />
+          ) : (
+            <Stack.Screen
+              name="PublicNavigator"
+              component={PublicNavigator}
+              options={{ headerShown: false }}
+            />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </CustomApolloProvider>
   );
 };
 
@@ -86,10 +88,8 @@ export const App = () => (
     clientId={AUTHENTICATION_CLIENT_ID}
     domain={AUTHENTICATION_DOMAIN}
   >
-    <CustomApolloProvider url={GRAPHQL_URL}>
-      <PaperProvider>
-        <Navigation />
-      </PaperProvider>
-    </CustomApolloProvider>
+    <PaperProvider>
+      <Navigation />
+    </PaperProvider>
   </AuthProvider>
 );
