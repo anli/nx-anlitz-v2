@@ -24,7 +24,6 @@ export type Scalars = {
 export type AddHabitInput = {
   name: Scalars['String'];
   user: UserRef;
-  userId: Scalars['String'];
 };
 
 export type AddHabitPayload = {
@@ -42,9 +41,8 @@ export type AddHabitPayloadHabitArgs = {
 };
 
 export type AddUserInput = {
-  habits?: Maybe<Array<Maybe<HabitRef>>>;
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+  habits?: Maybe<Array<HabitRef>>;
 };
 
 export type AddUserPayload = {
@@ -189,7 +187,6 @@ export type Habit = {
   id: Scalars['ID'];
   name: Scalars['String'];
   user: User;
-  userId: Scalars['String'];
 };
 
 
@@ -202,8 +199,6 @@ export type HabitAggregateResult = {
   count?: Maybe<Scalars['Int']>;
   nameMax?: Maybe<Scalars['String']>;
   nameMin?: Maybe<Scalars['String']>;
-  userIdMax?: Maybe<Scalars['String']>;
-  userIdMin?: Maybe<Scalars['String']>;
 };
 
 export type HabitFilter = {
@@ -213,13 +208,11 @@ export type HabitFilter = {
   name?: Maybe<StringFullTextFilter>;
   not?: Maybe<HabitFilter>;
   or?: Maybe<Array<Maybe<HabitFilter>>>;
-  userId?: Maybe<StringHashFilter>;
 };
 
 export enum HabitHasFilter {
   Name = 'name',
-  User = 'user',
-  UserId = 'userId'
+  User = 'user'
 }
 
 export type HabitOrder = {
@@ -229,21 +222,18 @@ export type HabitOrder = {
 };
 
 export enum HabitOrderable {
-  Name = 'name',
-  UserId = 'userId'
+  Name = 'name'
 }
 
 export type HabitPatch = {
   name?: Maybe<Scalars['String']>;
   user?: Maybe<UserRef>;
-  userId?: Maybe<Scalars['String']>;
 };
 
 export type HabitRef = {
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   user?: Maybe<UserRef>;
-  userId?: Maybe<Scalars['String']>;
 };
 
 export type Int64Filter = {
@@ -409,7 +399,8 @@ export type QueryGetHabitArgs = {
 
 
 export type QueryGetUserArgs = {
-  id: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
 };
 
 
@@ -489,7 +480,8 @@ export type SubscriptionGetHabitArgs = {
 
 
 export type SubscriptionGetUserArgs = {
-  id: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
 };
 
 
@@ -550,10 +542,10 @@ export type UpdateUserPayloadUserArgs = {
 
 export type User = {
   __typename?: 'User';
-  habits?: Maybe<Array<Maybe<Habit>>>;
+  email: Scalars['String'];
+  habits?: Maybe<Array<Habit>>;
   habitsAggregate?: Maybe<HabitAggregateResult>;
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
 };
 
 
@@ -572,25 +564,22 @@ export type UserHabitsAggregateArgs = {
 export type UserAggregateResult = {
   __typename?: 'UserAggregateResult';
   count?: Maybe<Scalars['Int']>;
-  idMax?: Maybe<Scalars['String']>;
-  idMin?: Maybe<Scalars['String']>;
-  nameMax?: Maybe<Scalars['String']>;
-  nameMin?: Maybe<Scalars['String']>;
+  emailMax?: Maybe<Scalars['String']>;
+  emailMin?: Maybe<Scalars['String']>;
 };
 
 export type UserFilter = {
   and?: Maybe<Array<Maybe<UserFilter>>>;
+  email?: Maybe<StringHashFilter>;
   has?: Maybe<Array<Maybe<UserHasFilter>>>;
-  id?: Maybe<StringHashFilter>;
-  name?: Maybe<StringExactFilter>;
+  id?: Maybe<Array<Scalars['ID']>>;
   not?: Maybe<UserFilter>;
   or?: Maybe<Array<Maybe<UserFilter>>>;
 };
 
 export enum UserHasFilter {
-  Habits = 'habits',
-  Id = 'id',
-  Name = 'name'
+  Email = 'email',
+  Habits = 'habits'
 }
 
 export type UserOrder = {
@@ -600,19 +589,17 @@ export type UserOrder = {
 };
 
 export enum UserOrderable {
-  Id = 'id',
-  Name = 'name'
+  Email = 'email'
 }
 
 export type UserPatch = {
-  habits?: Maybe<Array<Maybe<HabitRef>>>;
-  name?: Maybe<Scalars['String']>;
+  habits?: Maybe<Array<HabitRef>>;
 };
 
 export type UserRef = {
-  habits?: Maybe<Array<Maybe<HabitRef>>>;
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  habits?: Maybe<Array<HabitRef>>;
+  id?: Maybe<Scalars['ID']>;
 };
 
 export type WithinFilter = {

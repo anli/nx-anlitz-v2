@@ -1,6 +1,10 @@
 import faker from 'faker';
-import { HabitNonSubscriptionDocument } from './use-habit-non-subscription.generated';
-import { HabitDocument } from './use-habit.generated';
+import { DocumentNode } from 'graphql';
+import {
+  HabitNonSubscriptionDocument,
+  HabitNonSubscriptionQuery,
+} from './use-habit-non-subscription.generated';
+import { HabitDocument, HabitSubscription } from './use-habit.generated';
 
 faker.seed(0);
 export const habitData = {
@@ -15,7 +19,10 @@ const request = {
   },
 };
 
-export const habitMockHasData = [
+export const habitMockHasData: {
+  request: { query: DocumentNode };
+  result: { data: HabitSubscription };
+}[] = [
   {
     request,
     result: {
@@ -24,7 +31,10 @@ export const habitMockHasData = [
   },
 ];
 
-export const habitNonSubscriptionMockHasData = [
+export const habitNonSubscriptionMockHasData: {
+  request: { query: DocumentNode };
+  result: { data: HabitNonSubscriptionQuery };
+}[] = [
   {
     request: { ...request, query: HabitNonSubscriptionDocument },
     result: {

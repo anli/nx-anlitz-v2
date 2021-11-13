@@ -1,4 +1,7 @@
-import { AddHabitInput } from '@nx-anlitz/habit-app/utils/graphql-types';
+import {
+  AddHabitInput,
+  UserRef,
+} from '@nx-anlitz/habit-app/utils/graphql-types';
 import { useHabitCreateMutation } from './use-habit-create.generated';
 
 export const useHabitCreate = () => {
@@ -8,14 +11,13 @@ export const useHabitCreate = () => {
 
   const handleMutate = ({
     name,
-    userId,
-  }: Pick<AddHabitInput, 'name' | 'userId'>) => {
+    email,
+  }: Pick<AddHabitInput, 'name'> & Pick<UserRef, 'email'>) => {
     habitCreate({
       variables: {
         input: {
           name,
-          userId,
-          user: { id: userId },
+          user: { email },
         },
       },
     });

@@ -1,8 +1,6 @@
 subscription Habits {
-  getUser(id: "alice@anlitz.com") {
-    habits {
-      id
-      name
-    }
+  queryHabit {
+    id
+    name
   }
 }

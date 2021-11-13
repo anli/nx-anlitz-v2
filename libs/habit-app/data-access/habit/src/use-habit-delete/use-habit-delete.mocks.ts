@@ -1,5 +1,9 @@
 import faker from 'faker';
-import { HabitDeleteDocument } from './use-habit-delete.generated';
+import { DocumentNode } from 'graphql';
+import {
+  HabitDeleteDocument,
+  HabitDeleteMutation,
+} from './use-habit-delete.generated';
 
 faker.seed(0);
 const habitData = {
@@ -16,7 +20,10 @@ const request = {
   },
 };
 
-export const habitDeleteMockSuccess = [
+export const habitDeleteMockSuccess: {
+  request: { query: DocumentNode };
+  result: { data: HabitDeleteMutation };
+}[] = [
   {
     request,
     result: {

@@ -7,12 +7,21 @@ import { LoginScreen } from './login-screen';
 
 const Stack = createNativeStackNavigator();
 
-const mockAuthorize = jest.fn().mockResolvedValue({ accessToken: '' });
+const mockAuthorize = jest.fn();
+const mockUserInfo = jest.fn();
 jest.mock('react-native-auth0', () => {
   class auth0 {
     get webAuth() {
       return {
-        authorize: mockAuthorize,
+        authorize: mockAuthorize.mockResolvedValue({
+          idToken: 'ID_TOKEN',
+          accessToken: 'ACCESS_TOKEN',
+        }),
+      };
+    }
+    get auth() {
+      return {
+        userInfo: mockUserInfo.mockResolvedValue({ email: 'user@email.com' }),
       };
     }
   }
@@ -47,5 +56,6 @@ describe('Login Screen', () => {
     });
 
     expect(mockAuthorize).toBeCalledTimes(1);
+    expect(mockUserInfo).toBeCalledTimes(1);
   });
 });
