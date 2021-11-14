@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'habit-app',
+  displayName: 'storybook-app',
   preset: '../../jest.preset',
   setupFilesAfterEnv: ['<rootDir>/../../jest.setup.ts'],
 };

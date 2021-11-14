@@ -59,10 +59,16 @@
     "shared-auth": {
       "tags": []
     },
+    "shared-ui": {
+      "tags": []
+    },
     "shared-utils-apollo-provider": {
       "tags": []
     },
     "shared-utils-secure-store": {
+      "tags": []
+    },
+    "storybook-app": {
       "tags": []
     }
   }

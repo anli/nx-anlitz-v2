@@ -105,3 +105,7 @@ node_modules/
 **/fastlane/report.xml
 
 **/.env
+apps/storybook-app-e2e/artifacts
+
+## storybook
+**/storybook.requires.js
