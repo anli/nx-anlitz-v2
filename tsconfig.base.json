@@ -37,6 +37,7 @@
         "libs/habit-app/utils/navigation-types/src/index.ts"
       ],
       "@nx-anlitz/shared/auth": ["libs/shared/auth/src/index.ts"],
+      "@nx-anlitz/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@nx-anlitz/shared/utils/apollo-provider": [
         "libs/shared/utils/apollo-provider/src/index.ts"
       ],
