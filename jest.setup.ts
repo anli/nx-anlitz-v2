@@ -18,3 +18,5 @@ jest.mock('react-hook-form', () => {
   (global as any).window = {};
   return jest.requireActual('react-hook-form');
 });
+
+jest.mock('react-native-keychain');
