@@ -15,7 +15,7 @@
     "test": "nx affected:test",
     "test-all": "rm -rf coverage && npx nx run-many --all --target=test",
     "test-coverage": "node tools/combine-coverage-final.js && nyc merge coverage coverage/combine-coverage/coverage.json && nyc report -t coverage/combine-coverage --report-dir coverage/combine-coverage --reporter=html",
-    "check-coverage": "npm run test-all -- --configuration=ci --skip-nx-cache && npm run test-coverage && open coverage/combine-coverage/index.html",
+    "check-coverage": "(npm run test-all -- --configuration=ci --skip-nx-cache && npm run test-coverage) || open coverage/combine-coverage/index.html",
     "generate": "nx run-many --target=generate --all"
   },
   "private": true,
@@ -87,6 +87,7 @@
     "react-native": "0.65.1",
     "react-native-auth0": "^2.10.0",
     "react-native-dotenv": "^3.2.0",
+    "react-native-keychain": "^8.0.0",
     "react-native-paper": "^4.9.2",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0",

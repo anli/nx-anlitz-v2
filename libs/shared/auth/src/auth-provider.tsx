@@ -1,4 +1,9 @@
-import React, { createContext, FC, useState } from 'react';
+import {
+  deleteItemAllAsync,
+  getItemAsync,
+  setItemAsync,
+} from '@nx-anlitz/shared/utils/secure-store';
+import React, { createContext, FC, useEffect, useState } from 'react';
 import Auth0 from 'react-native-auth0';
 
 const SCOPE = 'openid profile email';
@@ -29,43 +34,59 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   clientId,
   children,
 }) => {
-  const [accessToken, setAccessToken] = useState<string | undefined>(undefined);
-  const [idToken, setIdToken] = useState<string | undefined>(undefined);
-  const [email, setEmail] = useState<string | undefined>(undefined);
-
+  const [credential, setCredential] = useState<
+    { accessToken: string; idToken: string; email: string } | undefined
+  >();
   const auth0 = new Auth0({
     domain,
     clientId,
   });
-
+  const isAuthenticated = Boolean(credential);
   const authContext = React.useMemo(
     () => ({
       login: async () => {
-        const credential = await auth0.webAuth.authorize({
+        const authorize = await auth0.webAuth.authorize({
           scope: SCOPE,
         });
         const userInfo = await auth0.auth.userInfo({
-          token: credential.accessToken,
+          token: authorize.accessToken,
         });
+        const _credential = {
+          accessToken: authorize.accessToken,
+          idToken: authorize.idToken,
+          email: userInfo.email,
+        };
 
-        setAccessToken(credential.accessToken);
-        setIdToken(credential.idToken);
-        setEmail(userInfo.email);
+        await setItemAsync('credential', _credential);
+        setCredential(_credential);
       },
       logout: async () => {
+        await deleteItemAllAsync();
         await auth0.webAuth.clearSession();
-        setAccessToken(undefined);
-        setIdToken(undefined);
-        setEmail(undefined);
+        setCredential(undefined);
       },
     }),
     [auth0.webAuth, auth0.auth]
   );
-  const isAuthenticated = Boolean(accessToken) && Boolean(email);
+
+  useEffect(() => {
+    const getStore = async () => {
+      const storeCredential = await getItemAsync('credential');
+
+      setCredential(storeCredential);
+    };
+    getStore();
+  }, []);
 
   return (
     <AuthContext.Provider
-      value={{ ...authContext, isAuthenticated, accessToken, idToken, email }}
+      value={{
+        ...authContext,
+        isAuthenticated,
+        accessToken: credential?.accessToken,
+        idToken: credential?.idToken,
+        email: credential?.email,
+      }}
     >
       {children}
     </AuthContext.Provider>

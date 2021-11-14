@@ -39,6 +39,9 @@
       "@nx-anlitz/shared/auth": ["libs/shared/auth/src/index.ts"],
       "@nx-anlitz/shared/utils/apollo-provider": [
         "libs/shared/utils/apollo-provider/src/index.ts"
+      ],
+      "@nx-anlitz/shared/utils/secure-store": [
+        "libs/shared/utils/secure-store/src/index.ts"
       ]
     }
   },

@@ -483,6 +483,40 @@
           }
         }
       }
+    },
+    "shared-utils-secure-store": {
+      "root": "libs/shared/utils/secure-store",
+      "sourceRoot": "libs/shared/utils/secure-store/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/utils/secure-store/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/utils/secure-store"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/utils/secure-store/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs-shared-utils-secure-store"
+            }
+          }
+        }
+      }
     }
   },
   "cli": {

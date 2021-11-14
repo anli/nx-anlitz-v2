@@ -9,14 +9,16 @@
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
     "faker": "*",
+    "graphql": "*",
     "react": "*",
     "react-hook-form": "*",
     "react-native": "*",
+    "react-native-auth0": "*",
+    "react-native-dotenv": "*",
+    "react-native-keychain": "*",
     "react-native-paper": "*",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
-    "react-test-renderer": "*",
-    "react-native-dotenv": "*",
-    "react-native-auth0": "*"
+    "react-test-renderer": "*"
   }
 }
