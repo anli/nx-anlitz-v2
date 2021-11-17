@@ -3,9 +3,11 @@ import { HabitUpdateScreen } from '@nx-anlitz/habit-app/feature/habit-update-scr
 import { HabitViewScreen } from '@nx-anlitz/habit-app/feature/habit-view-screen';
 import { HabitsScreen } from '@nx-anlitz/habit-app/feature/habits-screen';
 import { AuthProvider, LoginScreen, useAuth } from '@nx-anlitz/shared/auth';
+import { baseTheme } from '@nx-anlitz/shared/ui';
 import { CustomApolloProvider } from '@nx-anlitz/shared/utils/apollo-provider';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ThemeProvider } from '@shopify/restyle';
 import React from 'react';
 import {
   AUTHENTICATION_CLIENT_ID,
@@ -88,8 +90,10 @@ export const App = () => (
     clientId={AUTHENTICATION_CLIENT_ID}
     domain={AUTHENTICATION_DOMAIN}
   >
-    <PaperProvider>
-      <Navigation />
-    </PaperProvider>
+    <ThemeProvider theme={baseTheme}>
+      <PaperProvider>
+        <Navigation />
+      </PaperProvider>
+    </ThemeProvider>
   </AuthProvider>
 );

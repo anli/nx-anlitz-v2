@@ -1,15 +1,26 @@
 import { MockedProvider } from '@apollo/client/testing';
 import {
   habitsData,
+  MockHabitActivityCreateSuccessful,
   MockHasData,
   MockNoData,
 } from '@nx-anlitz/habit-app/data-access/habit';
 import { AuthProvider } from '@nx-anlitz/shared/auth';
+import { baseTheme } from '@nx-anlitz/shared/ui';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ThemeProvider } from '@shopify/restyle';
 import { act, fireEvent, render } from '@testing-library/react-native';
-import React from 'react';
+import {
+  addWeeks,
+  endOfWeek,
+  startOfToday,
+  startOfWeek,
+  subWeeks,
+} from 'date-fns';
+import React, { ReactNode } from 'react';
 import { HabitsScreen } from './habits-screen';
+import { formatDateRange } from './utils';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +49,16 @@ jest.mock('react-native-auth0', () => {
   return { __esModule: true, default: auth0 };
 });
 
+const CommonProviders = ({ children }: { children: ReactNode }) => {
+  return (
+    <ThemeProvider theme={baseTheme}>
+      <AuthProvider domain="" clientId="">
+        {children}
+      </AuthProvider>
+    </ThemeProvider>
+  );
+};
+
 describe('Habits Screen', () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -45,7 +66,7 @@ describe('Habits Screen', () => {
 
   it('No habits', async () => {
     const { getByText, getByTestId } = render(
-      <AuthProvider domain="" clientId="">
+      <CommonProviders>
         <MockedProvider mocks={MockNoData} addTypename={false}>
           <NavigationContainer>
             <Stack.Navigator>
@@ -57,7 +78,7 @@ describe('Habits Screen', () => {
             </Stack.Navigator>
           </NavigationContainer>
         </MockedProvider>
-      </AuthProvider>
+      </CommonProviders>
     );
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -71,7 +92,7 @@ describe('Habits Screen', () => {
 
   it('Create Habit', async () => {
     const { getByTestId } = render(
-      <AuthProvider domain="" clientId="">
+      <CommonProviders>
         <MockedProvider mocks={MockNoData} addTypename={false}>
           <NavigationContainer>
             <Stack.Navigator>
@@ -83,7 +104,7 @@ describe('Habits Screen', () => {
             </Stack.Navigator>
           </NavigationContainer>
         </MockedProvider>
-      </AuthProvider>
+      </CommonProviders>
     );
 
     await act(async () => {
@@ -97,8 +118,8 @@ describe('Habits Screen', () => {
   });
 
   it('Has habits', async () => {
-    const { getByText, queryByText } = render(
-      <AuthProvider domain="" clientId="">
+    const { queryByText } = render(
+      <CommonProviders>
         <MockedProvider mocks={MockHasData} addTypename={false}>
           <NavigationContainer>
             <Stack.Navigator>
@@ -110,11 +131,8 @@ describe('Habits Screen', () => {
             </Stack.Navigator>
           </NavigationContainer>
         </MockedProvider>
-      </AuthProvider>
+      </CommonProviders>
     );
-    expect(
-      getByText('You have no habits. Press + to create one')
-    ).toBeDefined();
 
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
@@ -125,7 +143,7 @@ describe('Habits Screen', () => {
 
   it('View Habit', async () => {
     const { getByText } = render(
-      <AuthProvider domain="" clientId="">
+      <CommonProviders>
         <MockedProvider mocks={MockHasData} addTypename={false}>
           <NavigationContainer>
             <Stack.Navigator>
@@ -137,7 +155,7 @@ describe('Habits Screen', () => {
             </Stack.Navigator>
           </NavigationContainer>
         </MockedProvider>
-      </AuthProvider>
+      </CommonProviders>
     );
 
     await act(async () => {
@@ -154,7 +172,7 @@ describe('Habits Screen', () => {
 
   it('Logout', async () => {
     const { getByTestId } = render(
-      <AuthProvider domain="" clientId="">
+      <CommonProviders>
         <MockedProvider mocks={[]} addTypename={false}>
           <NavigationContainer>
             <Stack.Navigator>
@@ -166,7 +184,7 @@ describe('Habits Screen', () => {
             </Stack.Navigator>
           </NavigationContainer>
         </MockedProvider>
-      </AuthProvider>
+      </CommonProviders>
     );
 
     await act(async () => {
@@ -180,5 +198,184 @@ describe('Habits Screen', () => {
     });
 
     expect(mockClearSession).toBeCalledTimes(1);
+  });
+
+  it('See correct header title when previous period is press', async () => {
+    const { getByText, getByTestId } = render(
+      <CommonProviders>
+        <MockedProvider mocks={MockHasData} addTypename={false}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Screen"
+                component={HabitsScreen.Component}
+                options={HabitsScreen.options}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </MockedProvider>
+      </CommonProviders>
+    );
+    const initialStartDate = startOfWeek(startOfToday(), { weekStartsOn: 1 });
+    const initialEndDate = endOfWeek(startOfToday(), { weekStartsOn: 1 });
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+    fireEvent.press(getByTestId('PreviousPeriodButton'));
+    fireEvent.press(getByTestId('PreviousPeriodButton'));
+    fireEvent.press(getByTestId('PreviousPeriodButton'));
+    fireEvent.press(getByTestId('PreviousPeriodButton'));
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    expect(
+      getByText(
+        formatDateRange(
+          subWeeks(initialStartDate, 4),
+          subWeeks(initialEndDate, 4)
+        )
+      )
+    ).toBeDefined();
+  });
+
+  it('See correct header title when next period is press', async () => {
+    const { getByText, getByTestId } = render(
+      <CommonProviders>
+        <MockedProvider mocks={MockHasData} addTypename={false}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Screen"
+                component={HabitsScreen.Component}
+                options={HabitsScreen.options}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </MockedProvider>
+      </CommonProviders>
+    );
+    const initialStartDate = startOfWeek(startOfToday(), { weekStartsOn: 1 });
+    const initialEndDate = endOfWeek(startOfToday(), { weekStartsOn: 1 });
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+    fireEvent.press(getByTestId('NextPeriodButton'));
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    expect(
+      getByText(
+        formatDateRange(
+          addWeeks(initialStartDate, 1),
+          addWeeks(initialEndDate, 1)
+        )
+      )
+    ).toBeDefined();
+  });
+
+  it('See correct header title when today is press', async () => {
+    const { getByText, getByTestId } = render(
+      <CommonProviders>
+        <MockedProvider mocks={MockHasData} addTypename={false}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Screen"
+                component={HabitsScreen.Component}
+                options={HabitsScreen.options}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </MockedProvider>
+      </CommonProviders>
+    );
+    const initialStartDate = startOfWeek(startOfToday(), { weekStartsOn: 1 });
+    const initialEndDate = endOfWeek(startOfToday(), { weekStartsOn: 1 });
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+    fireEvent.press(getByTestId('NextPeriodButton'));
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+    fireEvent.press(getByTestId('TodayButton'));
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    expect(
+      getByText(formatDateRange(initialStartDate, initialEndDate))
+    ).toBeDefined();
+  });
+
+  it('Press checked Habit Activity Day Checkbox', async () => {
+    const { getAllByTestId } = render(
+      <CommonProviders>
+        <MockedProvider mocks={MockHasData} addTypename={false}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Screen"
+                component={HabitsScreen.Component}
+                options={HabitsScreen.options}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </MockedProvider>
+      </CommonProviders>
+    );
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+    expect(
+      getAllByTestId('HabitActivityDayCheckbox')[0].props.accessibilityState
+        .checked
+    ).toEqual(true);
+    fireEvent.press(getAllByTestId('HabitActivityDayCheckbox')[0]);
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+  });
+
+  it('Press unchecked Habit Activity Day Checkbox ', async () => {
+    const { getAllByTestId } = render(
+      <CommonProviders>
+        <MockedProvider
+          mocks={[...MockHasData, ...MockHabitActivityCreateSuccessful]}
+          addTypename={false}
+        >
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Screen"
+                component={HabitsScreen.Component}
+                options={HabitsScreen.options}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </MockedProvider>
+      </CommonProviders>
+    );
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+    expect(
+      getAllByTestId('HabitActivityDayCheckbox')[1].props.accessibilityState
+        .checked
+    ).toEqual(false);
+    fireEvent.press(getAllByTestId('HabitActivityDayCheckbox')[1]);
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
   });
 });
