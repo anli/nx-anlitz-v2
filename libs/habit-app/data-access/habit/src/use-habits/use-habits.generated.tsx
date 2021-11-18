@@ -3,15 +3,23 @@ import * as Types from '@nx-anlitz/habit-app/utils/graphql-types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
-export type HabitsSubscriptionVariables = Types.Exact<{ [key: string]: never; }>;
+export type HabitsSubscriptionVariables = Types.Exact<{
+  minDate: Types.Scalars['DateTime'];
+  maxDate: Types.Scalars['DateTime'];
+}>;
 
 
-export type HabitsSubscription = { __typename?: 'Subscription', queryHabit?: Array<{ __typename?: 'Habit', id: string, name: string } | null | undefined> | null | undefined };
+export type HabitsSubscription = { __typename?: 'Subscription', queryHabit?: Array<{ __typename?: 'Habit', id: string, name: string, habitActivities?: Array<{ __typename?: 'HabitActivity', id: string, count: number, date: any }> | null | undefined } | null | undefined> | null | undefined };
 
 
 export const HabitsDocument = gql`
-    subscription Habits {
+    subscription Habits($minDate: DateTime!, $maxDate: DateTime!) {
   queryHabit {
+    habitActivities(filter: {date: {between: {min: $minDate, max: $maxDate}}}) {
+      id
+      count
+      date
+    }
     id
     name
   }
@@ -30,10 +38,12 @@ export const HabitsDocument = gql`
  * @example
  * const { data, loading, error } = useHabitsSubscription({
  *   variables: {
+ *      minDate: // value for 'minDate'
+ *      maxDate: // value for 'maxDate'
  *   },
  * });
  */
-export function useHabitsSubscription(baseOptions?: Apollo.SubscriptionHookOptions<HabitsSubscription, HabitsSubscriptionVariables>) {
+export function useHabitsSubscription(baseOptions: Apollo.SubscriptionHookOptions<HabitsSubscription, HabitsSubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useSubscription<HabitsSubscription, HabitsSubscriptionVariables>(HabitsDocument, options);
       }

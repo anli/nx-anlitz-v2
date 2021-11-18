@@ -1,4 +1,4 @@
-import { expect, by, device, element } from 'detox';
+import { by, device, element, expect } from 'detox';
 import { lorem } from 'faker';
 
 describe('Habit Create', () => {
@@ -10,6 +10,10 @@ describe('Habit Create', () => {
     await element(
       by.id('CreateHabitButton').withAncestor(by.id('HabitsScreen'))
     ).tap();
+
+    await waitFor(element(by.id('HabitCreateScreen')))
+      .toBeVisible()
+      .withTimeout(2000);
 
     await element(by.id('NameInput')).typeText(lorem.word());
     await element(by.id('NameInput')).tapReturnKey();

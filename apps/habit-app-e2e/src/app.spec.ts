@@ -6,6 +6,6 @@ describe('App', () => {
   });
 
   it('App is loaded', async () => {
-    await expect(element(by.text('Habits'))).toBeVisible();
+    await expect(element(by.id('HabitsScreen'))).toBeVisible();
   });
 });

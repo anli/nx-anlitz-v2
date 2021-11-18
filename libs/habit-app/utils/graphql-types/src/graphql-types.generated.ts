@@ -21,7 +21,28 @@ export type Scalars = {
   Int64: any;
 };
 
+export type AddHabitActivityInput = {
+  count: Scalars['Int'];
+  date: Scalars['DateTime'];
+  habit: HabitRef;
+};
+
+export type AddHabitActivityPayload = {
+  __typename?: 'AddHabitActivityPayload';
+  habitActivity?: Maybe<Array<Maybe<HabitActivity>>>;
+  numUids?: Maybe<Scalars['Int']>;
+};
+
+
+export type AddHabitActivityPayloadHabitActivityArgs = {
+  filter?: Maybe<HabitActivityFilter>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<HabitActivityOrder>;
+};
+
 export type AddHabitInput = {
+  habitActivities?: Maybe<Array<HabitActivityRef>>;
   name: Scalars['String'];
   user: UserRef;
 };
@@ -96,6 +117,21 @@ export type DateTimeFilter = {
 export type DateTimeRange = {
   max: Scalars['DateTime'];
   min: Scalars['DateTime'];
+};
+
+export type DeleteHabitActivityPayload = {
+  __typename?: 'DeleteHabitActivityPayload';
+  habitActivity?: Maybe<Array<Maybe<HabitActivity>>>;
+  msg?: Maybe<Scalars['String']>;
+  numUids?: Maybe<Scalars['Int']>;
+};
+
+
+export type DeleteHabitActivityPayloadHabitActivityArgs = {
+  filter?: Maybe<HabitActivityFilter>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<HabitActivityOrder>;
 };
 
 export type DeleteHabitPayload = {
@@ -184,14 +220,92 @@ export enum HttpMethod {
 
 export type Habit = {
   __typename?: 'Habit';
+  habitActivities?: Maybe<Array<HabitActivity>>;
+  habitActivitiesAggregate?: Maybe<HabitActivityAggregateResult>;
   id: Scalars['ID'];
   name: Scalars['String'];
   user: User;
 };
 
 
+export type HabitHabitActivitiesArgs = {
+  filter?: Maybe<HabitActivityFilter>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<HabitActivityOrder>;
+};
+
+
+export type HabitHabitActivitiesAggregateArgs = {
+  filter?: Maybe<HabitActivityFilter>;
+};
+
+
 export type HabitUserArgs = {
   filter?: Maybe<UserFilter>;
+};
+
+export type HabitActivity = {
+  __typename?: 'HabitActivity';
+  count: Scalars['Int'];
+  date: Scalars['DateTime'];
+  habit: Habit;
+  id: Scalars['ID'];
+};
+
+
+export type HabitActivityHabitArgs = {
+  filter?: Maybe<HabitFilter>;
+};
+
+export type HabitActivityAggregateResult = {
+  __typename?: 'HabitActivityAggregateResult';
+  count?: Maybe<Scalars['Int']>;
+  countAvg?: Maybe<Scalars['Float']>;
+  countMax?: Maybe<Scalars['Int']>;
+  countMin?: Maybe<Scalars['Int']>;
+  countSum?: Maybe<Scalars['Int']>;
+  dateMax?: Maybe<Scalars['DateTime']>;
+  dateMin?: Maybe<Scalars['DateTime']>;
+};
+
+export type HabitActivityFilter = {
+  and?: Maybe<Array<Maybe<HabitActivityFilter>>>;
+  date?: Maybe<DateTimeFilter>;
+  has?: Maybe<Array<Maybe<HabitActivityHasFilter>>>;
+  id?: Maybe<Array<Scalars['ID']>>;
+  not?: Maybe<HabitActivityFilter>;
+  or?: Maybe<Array<Maybe<HabitActivityFilter>>>;
+};
+
+export enum HabitActivityHasFilter {
+  Count = 'count',
+  Date = 'date',
+  Habit = 'habit'
+}
+
+export type HabitActivityOrder = {
+  asc?: Maybe<HabitActivityOrderable>;
+  desc?: Maybe<HabitActivityOrderable>;
+  then?: Maybe<HabitActivityOrder>;
+};
+
+export enum HabitActivityOrderable {
+  Count = 'count',
+  Date = 'date'
+}
+
+export type HabitActivityPatch = {
+  count?: Maybe<Scalars['Int']>;
+  date?: Maybe<Scalars['DateTime']>;
+  habit?: Maybe<HabitRef>;
+};
+
+export type HabitActivityRef = {
+  count?: Maybe<Scalars['Int']>;
+  date?: Maybe<Scalars['DateTime']>;
+  habit?: Maybe<HabitRef>;
+  id?: Maybe<Scalars['ID']>;
 };
 
 export type HabitAggregateResult = {
@@ -211,6 +325,7 @@ export type HabitFilter = {
 };
 
 export enum HabitHasFilter {
+  HabitActivities = 'habitActivities',
   Name = 'name',
   User = 'user'
 }
@@ -226,11 +341,13 @@ export enum HabitOrderable {
 }
 
 export type HabitPatch = {
+  habitActivities?: Maybe<Array<HabitActivityRef>>;
   name?: Maybe<Scalars['String']>;
   user?: Maybe<UserRef>;
 };
 
 export type HabitRef = {
+  habitActivities?: Maybe<Array<HabitActivityRef>>;
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   user?: Maybe<UserRef>;
@@ -288,16 +405,24 @@ export type MultiPolygonRef = {
 export type Mutation = {
   __typename?: 'Mutation';
   addHabit?: Maybe<AddHabitPayload>;
+  addHabitActivity?: Maybe<AddHabitActivityPayload>;
   addUser?: Maybe<AddUserPayload>;
   deleteHabit?: Maybe<DeleteHabitPayload>;
+  deleteHabitActivity?: Maybe<DeleteHabitActivityPayload>;
   deleteUser?: Maybe<DeleteUserPayload>;
   updateHabit?: Maybe<UpdateHabitPayload>;
+  updateHabitActivity?: Maybe<UpdateHabitActivityPayload>;
   updateUser?: Maybe<UpdateUserPayload>;
 };
 
 
 export type MutationAddHabitArgs = {
   input: Array<AddHabitInput>;
+};
+
+
+export type MutationAddHabitActivityArgs = {
+  input: Array<AddHabitActivityInput>;
 };
 
 
@@ -312,6 +437,11 @@ export type MutationDeleteHabitArgs = {
 };
 
 
+export type MutationDeleteHabitActivityArgs = {
+  filter: HabitActivityFilter;
+};
+
+
 export type MutationDeleteUserArgs = {
   filter: UserFilter;
 };
@@ -319,6 +449,11 @@ export type MutationDeleteUserArgs = {
 
 export type MutationUpdateHabitArgs = {
   input: UpdateHabitInput;
+};
+
+
+export type MutationUpdateHabitActivityArgs = {
+  input: UpdateHabitActivityInput;
 };
 
 
@@ -375,10 +510,13 @@ export type PolygonRef = {
 export type Query = {
   __typename?: 'Query';
   aggregateHabit?: Maybe<HabitAggregateResult>;
+  aggregateHabitActivity?: Maybe<HabitActivityAggregateResult>;
   aggregateUser?: Maybe<UserAggregateResult>;
   getHabit?: Maybe<Habit>;
+  getHabitActivity?: Maybe<HabitActivity>;
   getUser?: Maybe<User>;
   queryHabit?: Maybe<Array<Maybe<Habit>>>;
+  queryHabitActivity?: Maybe<Array<Maybe<HabitActivity>>>;
   queryUser?: Maybe<Array<Maybe<User>>>;
 };
 
@@ -388,12 +526,22 @@ export type QueryAggregateHabitArgs = {
 };
 
 
+export type QueryAggregateHabitActivityArgs = {
+  filter?: Maybe<HabitActivityFilter>;
+};
+
+
 export type QueryAggregateUserArgs = {
   filter?: Maybe<UserFilter>;
 };
 
 
 export type QueryGetHabitArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryGetHabitActivityArgs = {
   id: Scalars['ID'];
 };
 
@@ -409,6 +557,14 @@ export type QueryQueryHabitArgs = {
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<HabitOrder>;
+};
+
+
+export type QueryQueryHabitActivityArgs = {
+  filter?: Maybe<HabitActivityFilter>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<HabitActivityOrder>;
 };
 
 
@@ -456,10 +612,13 @@ export type StringTermFilter = {
 export type Subscription = {
   __typename?: 'Subscription';
   aggregateHabit?: Maybe<HabitAggregateResult>;
+  aggregateHabitActivity?: Maybe<HabitActivityAggregateResult>;
   aggregateUser?: Maybe<UserAggregateResult>;
   getHabit?: Maybe<Habit>;
+  getHabitActivity?: Maybe<HabitActivity>;
   getUser?: Maybe<User>;
   queryHabit?: Maybe<Array<Maybe<Habit>>>;
+  queryHabitActivity?: Maybe<Array<Maybe<HabitActivity>>>;
   queryUser?: Maybe<Array<Maybe<User>>>;
 };
 
@@ -469,12 +628,22 @@ export type SubscriptionAggregateHabitArgs = {
 };
 
 
+export type SubscriptionAggregateHabitActivityArgs = {
+  filter?: Maybe<HabitActivityFilter>;
+};
+
+
 export type SubscriptionAggregateUserArgs = {
   filter?: Maybe<UserFilter>;
 };
 
 
 export type SubscriptionGetHabitArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type SubscriptionGetHabitActivityArgs = {
   id: Scalars['ID'];
 };
 
@@ -493,11 +662,39 @@ export type SubscriptionQueryHabitArgs = {
 };
 
 
+export type SubscriptionQueryHabitActivityArgs = {
+  filter?: Maybe<HabitActivityFilter>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<HabitActivityOrder>;
+};
+
+
 export type SubscriptionQueryUserArgs = {
   filter?: Maybe<UserFilter>;
   first?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   order?: Maybe<UserOrder>;
+};
+
+export type UpdateHabitActivityInput = {
+  filter: HabitActivityFilter;
+  remove?: Maybe<HabitActivityPatch>;
+  set?: Maybe<HabitActivityPatch>;
+};
+
+export type UpdateHabitActivityPayload = {
+  __typename?: 'UpdateHabitActivityPayload';
+  habitActivity?: Maybe<Array<Maybe<HabitActivity>>>;
+  numUids?: Maybe<Scalars['Int']>;
+};
+
+
+export type UpdateHabitActivityPayloadHabitActivityArgs = {
+  filter?: Maybe<HabitActivityFilter>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<HabitActivityOrder>;
 };
 
 export type UpdateHabitInput = {
