@@ -73,7 +73,17 @@ export const AuthProvider: FC<AuthProviderProps> = ({
     const getStore = async () => {
       const storeCredential = await getItemAsync('credential');
 
-      setCredential(storeCredential);
+      try {
+        await auth0.auth.userInfo({
+          token: storeCredential.accessToken,
+        });
+
+        /* istanbul ignore next */
+        setCredential(storeCredential);
+      } catch {
+        await deleteItemAllAsync();
+        setCredential(undefined);
+      }
     };
     getStore();
   }, []);
