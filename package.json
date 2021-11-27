@@ -55,6 +55,7 @@
     "@types/react-native-auth0": "^2.5.9",
     "@typescript-eslint/eslint-plugin": "~4.28.3",
     "@typescript-eslint/parser": "~4.28.3",
+    "@welldone-software/why-did-you-render": "^6.2.3",
     "babel-jest": "27.0.6",
     "detox": "18.20.2",
     "dotenv": "^10.0.0",

@@ -13,19 +13,19 @@ import {
 } from '@react-navigation/native-stack';
 import {
   addWeeks,
+  eachDayOfInterval,
   endOfWeek,
+  format,
   formatISO,
-  isSameDay,
   startOfToday,
   startOfWeek,
   subWeeks,
 } from 'date-fns';
-import { toDate } from 'date-fns-tz';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useState } from 'react';
 import { FlatList, SafeAreaView } from 'react-native';
 import { FAB, IconButton, List } from 'react-native-paper';
 import { HabitActivityDayCheckbox } from './components';
-import { filterNullable, formatDateRange, getDays } from './utils';
+import { filterNullable, formatDateRange } from './utils';
 
 const Component = () => {
   const { navigate, setOptions } =
@@ -41,7 +41,6 @@ const Component = () => {
     minDate: formatISO(periodStartDate),
     maxDate: formatISO(periodEndDate),
   });
-  const days = getDays(periodStartDate);
 
   useLayoutEffect(() => {
     setOptions({
@@ -91,37 +90,71 @@ const Component = () => {
     navigate('HabitViewScreen', { id });
   };
 
-  const handleUpdateHabitActivity = async ({
-    date,
-    habitId,
-    count,
-    habitActivityId,
-  }: {
-    date: string;
-    habitId: string;
-    count: number;
-    habitActivityId?: string;
-  }) => {
-    if (habitActivityId) {
-      return updateHabitActivity({
-        id: habitActivityId,
-        set: { count, date, habit: { id: habitId } },
-      });
-    }
-
-    return createHabitActivity({
-      count,
+  const handleUpdateHabitActivity = useCallback(
+    async ({
       date,
-      habit: { id: habitId },
+      habitId,
+      count,
+      habitActivityId,
+    }: {
+      date: string;
+      habitId: string;
+      count: number;
+      habitActivityId?: string;
+    }) => {
+      if (habitActivityId) {
+        return updateHabitActivity({
+          id: habitActivityId,
+          set: { count, date, habit: { id: habitId } },
+        });
+      }
+
+      return createHabitActivity({
+        count,
+        date,
+        habit: { id: habitId },
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  const mapData = ({
+    periodStartDate,
+    periodEndDate,
+  }: {
+    periodStartDate: Date;
+    periodEndDate: Date;
+  }) =>
+    filterNullable(data).map((dataItem) => {
+      return {
+        id: dataItem.id,
+        name: dataItem.name,
+        data: eachDayOfInterval({
+          start: periodStartDate,
+          end: periodEndDate,
+        }).map((day) => {
+          const myActivity = dataItem?.habitActivities?.find((activity) => {
+            return activity.date.substring(0, 10) === format(day, 'yyyy-MM-dd');
+          });
+
+          return {
+            date: day,
+            count: myActivity?.count ?? 0,
+            id: myActivity?.id,
+          };
+        }),
+      };
     });
-  };
+
+  const mappedData = mapData({ periodStartDate, periodEndDate });
 
   return (
     <SafeAreaView testID="HabitsScreen" style={{ flex: 1 }}>
       {!loading && (
         <FlatList
-          data={filterNullable(data)}
-          renderItem={({ item: { id, name, habitActivities } }) => {
+          data={mappedData}
+          renderItem={({ item: { id, name, data: _data } }) => {
             return (
               <>
                 <List.Item
@@ -130,29 +163,18 @@ const Component = () => {
                   onPress={() => handleViewHabit(id)}
                 />
                 <View flexDirection="row" justifyContent="space-evenly">
-                  {days.map(({ date: dayDate, dayName }) => {
-                    const habitActivity = habitActivities?.find(
-                      ({ date: habitActivityDate }) =>
-                        isSameDay(toDate(habitActivityDate), dayDate)
-                    );
-
-                    return (
-                      <HabitActivityDayCheckbox
-                        testID="HabitActivityDayCheckbox"
-                        key={dayName}
-                        title={dayName}
-                        count={habitActivity?.count}
-                        onPress={(count) =>
-                          handleUpdateHabitActivity({
-                            date: formatISO(dayDate),
-                            habitId: id,
-                            count,
-                            habitActivityId: habitActivity?.id,
-                          })
-                        }
-                      />
-                    );
-                  })}
+                  {_data.map((dailyActivity) => (
+                    <HabitActivityDayCheckbox
+                      testID="HabitActivityDayCheckbox"
+                      key={format(dailyActivity.date, 'yyyy-MM-dd')}
+                      title={format(dailyActivity.date, 'EEEEEE')}
+                      date={formatISO(dailyActivity.date)}
+                      count={dailyActivity?.count}
+                      habitId={id}
+                      habitActivityId={dailyActivity?.id}
+                      onPress={handleUpdateHabitActivity}
+                    />
+                  ))}
                 </View>
               </>
             );
