@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "android": "nx run-android",
+    "beta-ios": "(cd apps/habit-app/ios && fastlane beta)",
     "check-coverage": "(npm run test-all -- --configuration=ci --skip-nx-cache && npm run test-coverage) || open coverage/combine-coverage/index.html",
     "e2e-build-android": "nx affected --target=e2e-build-android",
     "e2e-build-ios": "nx affected --target=e2e-build-ios",
