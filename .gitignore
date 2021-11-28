@@ -67,6 +67,7 @@ DerivedData
 **/android/**/local.properties
 **/android/**/*.iml
 **/android/java_*
+**/playstore.json
 
 ## BUCK
 
