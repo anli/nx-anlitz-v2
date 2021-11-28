@@ -5,6 +5,7 @@ const pxToNumber = (px: string) => {
   return parseInt(px.replace('px', ''), 10);
 };
 
+// https://www.figma.com/file/QwZvryiWjvuE0nnBWBDUXn/Polaris-for-Admin%3A-Colors-(Community)?node-id=2989%3A136
 const base = {
   colors: {
     surface: tokens.colorWhite,
@@ -12,6 +13,8 @@ const base = {
     success: tokens.colorGreen,
     warning: tokens.colorYellow,
     critical: tokens.colorRed,
+    primary: tokens.colorGreen,
+    icon: tokens.colorBlack,
   },
   spacing: {
     none: 0,
@@ -25,6 +28,34 @@ const base = {
   breakpoints: {
     phone: 0,
     tablet: 768,
+  },
+  screenVariants: {
+    defaults: {
+      flex: 1,
+      backgroundColor: 'surface',
+    },
+  },
+  buttonVariants: {
+    defaults: {
+      backgroundColor: 'primary',
+    },
+  },
+  iconButtonVariants: {
+    defaults: {
+      color: 'icon',
+    },
+  },
+  fabVariants: {
+    defaults: {
+      color: 'surface',
+      backgroundColor: 'primary',
+    },
+  },
+  textVariants: {
+    defaults: {
+      fontSize: 18,
+      color: 'text',
+    },
   },
 };
 

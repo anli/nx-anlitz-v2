@@ -3,12 +3,17 @@ import { HabitUpdateScreen } from '@nx-anlitz/habit-app/feature/habit-update-scr
 import { HabitViewScreen } from '@nx-anlitz/habit-app/feature/habit-view-screen';
 import { HabitsScreen } from '@nx-anlitz/habit-app/feature/habits-screen';
 import { AuthProvider, LoginScreen, useAuth } from '@nx-anlitz/shared/auth';
-import { baseTheme } from '@nx-anlitz/shared/ui';
+import { baseTheme, darkTheme, useDarkMode } from '@nx-anlitz/shared/ui';
 import { CustomApolloProvider } from '@nx-anlitz/shared/utils/apollo-provider';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeProvider } from '@shopify/restyle';
 import React from 'react';
+import { StatusBar } from 'react-native';
 import {
   AUTHENTICATION_CLIENT_ID,
   AUTHENTICATION_DOMAIN,
@@ -59,10 +64,11 @@ const AuthenticatedNavigator = () => {
 
 export const Navigation = () => {
   const { isAuthenticated, idToken } = useAuth();
+  const isDarkMode = useDarkMode();
 
   return (
     <CustomApolloProvider url={GRAPHQL_URL} authToken={idToken}>
-      <NavigationContainer>
+      <NavigationContainer theme={isDarkMode ? DarkTheme : DefaultTheme}>
         <Stack.Navigator>
           {isAuthenticated ? (
             <Stack.Screen
@@ -85,15 +91,20 @@ export const Navigation = () => {
   );
 };
 
-export const App = () => (
-  <AuthProvider
-    clientId={AUTHENTICATION_CLIENT_ID}
-    domain={AUTHENTICATION_DOMAIN}
-  >
-    <ThemeProvider theme={baseTheme}>
-      <PaperProvider>
-        <Navigation />
-      </PaperProvider>
-    </ThemeProvider>
-  </AuthProvider>
-);
+export const App = () => {
+  const isDarkMode = useDarkMode();
+
+  return (
+    <AuthProvider
+      clientId={AUTHENTICATION_CLIENT_ID}
+      domain={AUTHENTICATION_DOMAIN}
+    >
+      <ThemeProvider theme={isDarkMode ? darkTheme : baseTheme}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <PaperProvider>
+          <Navigation />
+        </PaperProvider>
+      </ThemeProvider>
+    </AuthProvider>
+  );
+};
