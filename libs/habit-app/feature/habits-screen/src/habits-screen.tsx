@@ -5,7 +5,7 @@ import {
 } from '@nx-anlitz/habit-app/data-access/habit';
 import { RootStackParamList } from '@nx-anlitz/habit-app/utils/navigation-types';
 import { useAuth } from '@nx-anlitz/shared/auth';
-import { Text, View } from '@nx-anlitz/shared/ui';
+import { FAB, IconButton, Screen, Text, View } from '@nx-anlitz/shared/ui';
 import { useNavigation } from '@react-navigation/native';
 import {
   NativeStackNavigationOptions,
@@ -22,8 +22,7 @@ import {
   subWeeks,
 } from 'date-fns';
 import React, { useCallback, useLayoutEffect, useState } from 'react';
-import { FlatList, SafeAreaView } from 'react-native';
-import { FAB, IconButton, List } from 'react-native-paper';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { HabitActivityDayCheckbox } from './components';
 import { filterNullable, formatDateRange } from './utils';
 
@@ -120,19 +119,19 @@ const Component = () => {
   );
 
   const mapData = ({
-    periodStartDate,
-    periodEndDate,
+    startDate,
+    endDate,
   }: {
-    periodStartDate: Date;
-    periodEndDate: Date;
+    startDate: Date;
+    endDate: Date;
   }) =>
     filterNullable(data).map((dataItem) => {
       return {
         id: dataItem.id,
         name: dataItem.name,
         data: eachDayOfInterval({
-          start: periodStartDate,
-          end: periodEndDate,
+          start: startDate,
+          end: endDate,
         }).map((day) => {
           const myActivity = dataItem?.habitActivities?.find((activity) => {
             return activity.date.substring(0, 10) === format(day, 'yyyy-MM-dd');
@@ -147,21 +146,27 @@ const Component = () => {
       };
     });
 
-  const mappedData = mapData({ periodStartDate, periodEndDate });
+  const mappedData = mapData({
+    startDate: periodStartDate,
+    endDate: periodEndDate,
+  });
 
   return (
-    <SafeAreaView testID="HabitsScreen" style={{ flex: 1 }}>
+    <Screen testID="HabitsScreen">
       {!loading && (
         <FlatList
           data={mappedData}
           renderItem={({ item: { id, name, data: _data } }) => {
             return (
               <>
-                <List.Item
-                  key={`${id}`}
-                  title={name}
-                  onPress={() => handleViewHabit(id)}
-                />
+                <View padding="base">
+                  <TouchableOpacity
+                    key={`${id}`}
+                    onPress={() => handleViewHabit(id)}
+                  >
+                    <Text>{name}</Text>
+                  </TouchableOpacity>
+                </View>
                 <View flexDirection="row" justifyContent="space-evenly">
                   {_data.map((dailyActivity) => (
                     <HabitActivityDayCheckbox
@@ -192,7 +197,7 @@ const Component = () => {
           icon="plus"
         />
       </View>
-    </SafeAreaView>
+    </Screen>
   );
 };
 

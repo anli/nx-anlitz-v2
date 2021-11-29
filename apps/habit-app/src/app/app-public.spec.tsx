@@ -23,6 +23,15 @@ jest.mock('@nx-anlitz/shared/auth', () => {
   };
 });
 
+jest.mock('@nx-anlitz/shared/ui', () => {
+  const module = jest.requireActual('@nx-anlitz/shared/ui');
+
+  return {
+    ...module,
+    useDarkMode: jest.fn().mockReturnValue(true),
+  };
+});
+
 describe('App', () => {
   it('Public User', () => {
     const { getByTestId } = render(

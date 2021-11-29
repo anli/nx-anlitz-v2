@@ -1,5 +1,7 @@
+import { baseTheme } from '@nx-anlitz/shared/ui';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ThemeProvider } from '@shopify/restyle';
 import { act, fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { AuthProvider } from '../auth-provider';
@@ -36,17 +38,19 @@ describe('Login Screen', () => {
 
   it('Login', async () => {
     const { getByTestId } = render(
-      <AuthProvider domain="" clientId="">
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Screen"
-              component={LoginScreen.Component}
-              options={LoginScreen.options}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </AuthProvider>
+      <ThemeProvider theme={baseTheme}>
+        <AuthProvider domain="" clientId="">
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Screen"
+                component={LoginScreen.Component}
+                options={LoginScreen.options}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </AuthProvider>
+      </ThemeProvider>
     );
 
     fireEvent.press(getByTestId('LoginButton'));
