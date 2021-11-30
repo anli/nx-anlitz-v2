@@ -12,7 +12,7 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeProvider } from '@shopify/restyle';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import {
   AUTHENTICATION_CLIENT_ID,
@@ -20,6 +20,7 @@ import {
   GRAPHQL_URL,
 } from 'react-native-dotenv';
 import { Provider as PaperProvider } from 'react-native-paper';
+import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -63,8 +64,15 @@ const AuthenticatedNavigator = () => {
 };
 
 export const Navigation = () => {
-  const { isAuthenticated, idToken } = useAuth();
+  const { isAuthenticated, idToken, loading } = useAuth();
   const isDarkMode = useDarkMode();
+
+  /* istanbul ignore next */
+  useEffect(() => {
+    if (!loading) {
+      SplashScreen.hide();
+    }
+  }, [loading]);
 
   return (
     <CustomApolloProvider url={GRAPHQL_URL} authToken={idToken}>

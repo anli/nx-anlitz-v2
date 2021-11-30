@@ -17,7 +17,7 @@ export type ButtonProps = SpacingProps<Theme> &
   VariantProps<Theme, 'buttonVariants'> &
   React.ComponentProps<typeof ButtonNative>;
 
-const restyleFunctions = [variant as any, color];
+const restyleFunctions = [variant, color];
 
 const Component = createRestyleComponent<ButtonProps, Theme>(
   [variant],
@@ -25,6 +25,7 @@ const Component = createRestyleComponent<ButtonProps, Theme>(
 );
 
 export const Button = ({ children, ...rest }: ButtonProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const props = useRestyle(restyleFunctions, rest) as any;
   const isDarkMode = useDarkMode();
   const buttonColor = props?.style?.find(() => true).color;

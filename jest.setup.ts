@@ -20,3 +20,8 @@ jest.mock('react-hook-form', () => {
 });
 
 jest.mock('react-native-keychain');
+
+jest.mock('react-native-splash-screen', () => ({
+  show: jest.fn(),
+  hide: jest.fn(),
+}));

@@ -15,6 +15,7 @@ type AuthContextProps = {
   accessToken?: string;
   idToken?: string;
   email?: string;
+  loading: boolean;
 };
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -22,6 +23,7 @@ export const AuthContext = createContext<AuthContextProps>({
   accessToken: undefined,
   idToken: undefined,
   email: undefined,
+  loading: true,
 });
 
 type AuthProviderProps = {
@@ -34,6 +36,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   clientId,
   children,
 }) => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [credential, setCredential] = useState<
     { accessToken: string; idToken: string; email: string } | undefined
   >();
@@ -80,12 +83,16 @@ export const AuthProvider: FC<AuthProviderProps> = ({
 
         /* istanbul ignore next */
         setCredential(storeCredential);
+        /* istanbul ignore next */
+        setLoading(false);
       } catch {
         await deleteItemAllAsync();
         setCredential(undefined);
+        setLoading(false);
       }
     };
     getStore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -96,6 +103,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({
         accessToken: credential?.accessToken,
         idToken: credential?.idToken,
         email: credential?.email,
+        loading,
       }}
     >
       {children}

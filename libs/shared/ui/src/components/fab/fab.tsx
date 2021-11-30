@@ -18,11 +18,12 @@ export type FABProps = ColorProps<Theme> &
   BackgroundColorProps<Theme> &
   React.ComponentProps<typeof FABNative>;
 
-const restyleFunctions = [variant as any, color, backgroundColor];
+const restyleFunctions = [variant, color, backgroundColor];
 
 const Component = createRestyleComponent<FABProps, Theme>([variant], FABNative);
 
 export const FAB = ({ ...rest }: FABProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const props = useRestyle(restyleFunctions, rest) as any;
   const buttonColor = props?.style?.find(() => true).color;
 
