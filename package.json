@@ -13,7 +13,7 @@
     "e2e-test-ios": "nx affected --target=e2e-test-ios",
     "generate": "nx run-many --target=generate --all",
     "ios": "nx run-ios",
-    "lint": "nx affected:lint",
+    "lint": "nx affected:lint --max-warnings=0",
     "postinstall": "patch-package",
     "prestorybook-start": "cd apps/storybook-app/src && sb-rn-get-stories",
     "start": "nx serve",
@@ -110,6 +110,7 @@
     "react-native-paper": "^4.9.2",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0",
+    "react-native-splash-screen": "^3.2.0",
     "react-native-vector-icons": "^9.0.0",
     "subscriptions-transport-ws": "^0.9.19",
     "tslib": "^2.0.0"

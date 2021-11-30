@@ -15,7 +15,7 @@ export type IconButtonProps = ColorProps<Theme> &
   VariantProps<Theme, 'iconButtonVariants'> &
   React.ComponentProps<typeof IconButtonNative>;
 
-const restyleFunctions = [variant as any, color];
+const restyleFunctions = [variant, color];
 
 const Component = createRestyleComponent<IconButtonProps, Theme>(
   [variant],
@@ -23,6 +23,7 @@ const Component = createRestyleComponent<IconButtonProps, Theme>(
 );
 
 export const IconButton = ({ ...rest }: IconButtonProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const props = useRestyle(restyleFunctions, rest) as any;
   const buttonColor = props?.style?.find(() => true).color;
 

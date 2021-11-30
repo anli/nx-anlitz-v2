@@ -4,10 +4,18 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "*",
+    "@react-native-async-storage/async-storage": "*",
     "@react-navigation/native": "*",
     "@react-navigation/native-stack": "*",
+    "@shopify/polaris-tokens": "*",
+    "@shopify/restyle": "*",
+    "@storybook/addon-ondevice-backgrounds": "*",
+    "@storybook/react-native": "*",
     "@testing-library/jest-native": "*",
     "@testing-library/react-native": "*",
+    "@welldone-software/why-did-you-render": "*",
+    "date-fns": "*",
+    "date-fns-tz": "*",
     "faker": "*",
     "graphql": "*",
     "react": "*",
@@ -19,14 +27,7 @@
     "react-native-paper": "*",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
-    "react-test-renderer": "*",
-    "@shopify/restyle": "*",
-    "@storybook/addon-ondevice-backgrounds": "*",
-    "@storybook/react-native": "*",
-    "@shopify/polaris-tokens": "*",
-    "@react-native-async-storage/async-storage": "*",
-    "date-fns": "*",
-    "date-fns-tz": "*",
-    "@welldone-software/why-did-you-render": "*"
+    "react-native-splash-screen": "*",
+    "react-test-renderer": "*"
   }
 }
