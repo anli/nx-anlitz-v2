@@ -12,11 +12,24 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+skip_docs
+
+fastlane_require 'dotenv'
 
 default_platform(:ios)
 
 platform :ios do
   lane :beta do
+    Dotenv.overload '../.env'
+
+    increment_version_number(
+      version_number: load_json(json_path: "../package.json")["version"],      
+    )
+
+    increment_build_number(
+      build_number: number_of_commits(),
+    )    
+
     sync_code_signing(type: "appstore", readonly: true)
     build_app(
       scheme: "Habit", 
@@ -28,6 +41,7 @@ platform :ios do
       }
     )
     upload_to_testflight(
+      username: ENV['APPLE_ID_USERNAME'],
       skip_waiting_for_build_processing: true
     )
   end
