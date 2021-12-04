@@ -72,7 +72,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({
 
   useEffect(() => {
     const restoreUserSession = async () => {
-      setLoading(true);
       const storeCredential = await getItemAsync('credential');
 
       /* istanbul ignore next */
@@ -87,14 +86,14 @@ export const AuthProvider: FC<AuthProviderProps> = ({
           });
           setIdToken(authInfo.idToken);
           setUser({ email: userInfo.email });
-          setLoading(false);
         } catch (error) {
           await deleteItemAllAsync();
           setIdToken(undefined);
           setUser(undefined);
-          setLoading(false);
         }
       }
+
+      setLoading(false);
     };
     restoreUserSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
