@@ -68,6 +68,9 @@
     "shared-utils-apollo-provider": {
       "tags": []
     },
+    "shared-utils-i18n": {
+      "tags": []
+    },
     "shared-utils-secure-store": {
       "tags": []
     },

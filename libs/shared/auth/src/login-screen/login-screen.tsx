@@ -4,6 +4,7 @@ import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import faker from 'faker';
 import LottieView from 'lottie-react-native';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../use-auth';
 
 faker.seed(0);
@@ -12,6 +13,9 @@ const description = faker.lorem.sentences(4);
 
 const Component = () => {
   const { login } = useAuth();
+  const { t, ready } = useTranslation('loginScreen', {
+    useSuspense: false,
+  });
 
   return (
     <Screen testID="LoginScreen">
@@ -20,9 +24,9 @@ const Component = () => {
       </View>
       <View>
         <Text fontSize={42} padding="base">
-          {title}
+          {ready && t('title')}
         </Text>
-        <Text padding="base">{description}</Text>
+        <Text padding="base">{ready && t('description')}</Text>
       </View>
       <View padding="base">
         <Button
@@ -32,7 +36,7 @@ const Component = () => {
           onPress={login}
           testID="LoginButton"
         >
-          Login
+          {ready && t('login')}
         </Button>
       </View>
     </Screen>

@@ -5,6 +5,7 @@ import { HabitsScreen } from '@nx-anlitz/habit-app/feature/habits-screen';
 import { AuthProvider, LoginScreen, useAuth } from '@nx-anlitz/shared/auth';
 import { baseTheme, darkTheme, useDarkMode } from '@nx-anlitz/shared/ui';
 import { CustomApolloProvider } from '@nx-anlitz/shared/utils/apollo-provider';
+import { init as i18nInit } from '@nx-anlitz/shared/utils/i18n';
 import {
   DarkTheme,
   DefaultTheme,
@@ -18,9 +19,12 @@ import {
   AUTHENTICATION_CLIENT_ID,
   AUTHENTICATION_DOMAIN,
   GRAPHQL_URL,
+  I18N_URL,
 } from 'react-native-dotenv';
 import { Provider as PaperProvider } from 'react-native-paper';
 import SplashScreen from 'react-native-splash-screen';
+
+i18nInit(I18N_URL);
 
 const Stack = createNativeStackNavigator();
 

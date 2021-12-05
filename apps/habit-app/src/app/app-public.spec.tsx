@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/client/testing';
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 import React from 'react';
 import 'react-native';
 import { App } from './app';
@@ -33,12 +33,17 @@ jest.mock('@nx-anlitz/shared/ui', () => {
 });
 
 describe('App', () => {
-  it('Public User', () => {
+  it('Public User', async () => {
     const { getByTestId } = render(
       <MockedProvider mocks={[]} addTypename={false}>
         <App />
       </MockedProvider>
     );
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
     expect(getByTestId('LoginScreen')).toBeDefined();
   });
 });
