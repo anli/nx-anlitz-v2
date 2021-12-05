@@ -1,8 +1,11 @@
 import {
+  border,
+  BorderProps,
   color,
   ColorProps,
   createRestyleComponent,
   createVariant,
+  spacing,
   SpacingProps,
   useRestyle,
   VariantProps,
@@ -15,9 +18,10 @@ const variant = createVariant({ themeKey: 'buttonVariants' });
 export type ButtonProps = SpacingProps<Theme> &
   ColorProps<Theme> &
   VariantProps<Theme, 'buttonVariants'> &
+  BorderProps<Theme> &
   React.ComponentProps<typeof ButtonNative>;
 
-const restyleFunctions = [variant, color];
+const restyleFunctions = [variant, color, spacing, border];
 
 const Component = createRestyleComponent<ButtonProps, Theme>(
   [variant],
@@ -31,7 +35,7 @@ export const Button = ({ children, ...rest }: ButtonProps) => {
   const buttonColor = props?.style?.find(() => true).color;
 
   return (
-    <Component color={buttonColor} {...props} dark={isDarkMode}>
+    <Component color={buttonColor} {...props} dark={!isDarkMode}>
       {children}
     </Component>
   );
