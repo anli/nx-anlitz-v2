@@ -53,7 +53,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({
         const userInfo = await auth0.auth.userInfo({
           token: authInfo.accessToken,
         });
-        console.log({ refreshToken: authInfo.refreshToken });
         await setItemAsync('credential', {
           refreshToken: `${authInfo.refreshToken}`,
         });

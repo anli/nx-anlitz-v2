@@ -28,6 +28,7 @@
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
     "react-native-splash-screen": "*",
-    "react-test-renderer": "*"
+    "react-test-renderer": "*",
+    "lottie-react-native": "*"
   }
 }

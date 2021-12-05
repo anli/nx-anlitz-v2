@@ -25,6 +25,15 @@ const base = {
     loose: pxToNumber(tokens.spacingLoose),
     extraLoose: pxToNumber(tokens.spacingExtraLoose),
   },
+  borderRadii: {
+    none: 0,
+    extraTight: pxToNumber(tokens.spacingExtraTight),
+    tight: pxToNumber(tokens.spacingTight),
+    baseTight: pxToNumber(tokens.spacingBaseTight),
+    base: pxToNumber(tokens.spacingBase),
+    loose: pxToNumber(tokens.spacingLoose),
+    extraLoose: pxToNumber(tokens.spacingExtraLoose),
+  },
   breakpoints: {
     phone: 0,
     tablet: 768,

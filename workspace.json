@@ -24,7 +24,9 @@
         },
         "bundle-ios": {
           "executor": "@nrwl/react-native:bundle",
-          "outputs": ["apps/habit-app/build"],
+          "outputs": [
+            "apps/habit-app/build"
+          ],
           "options": {
             "entryFile": "apps/habit-app/src/main.tsx",
             "platform": "ios",
@@ -61,15 +63,21 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/habit-app/**/*.{ts,tsx,js,jsx}"],
+            "lintFilePatterns": [
+              "apps/habit-app/**/*.{ts,tsx,js,jsx}"
+            ],
             "maxWarnings": 0
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/habit-app"],
+          "outputs": [
+            "coverage/apps/habit-app"
+          ],
           "options": {
             "jestConfig": "apps/habit-app/jest.config.js",
             "passWithNoTests": true
@@ -90,7 +98,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/data-access/habit/**/*.{ts,tsx,js,jsx}"
@@ -100,7 +110,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/habit-app/data-access/habit"],
+          "outputs": [
+            "coverage/libs/habit-app/data-access/habit"
+          ],
           "options": {
             "jestConfig": "libs/habit-app/data-access/habit/jest.config.js",
             "passWithNoTests": true
@@ -171,9 +183,13 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/habit-app-e2e/**/*.{ts,tsx,js,jsx}"],
+            "lintFilePatterns": [
+              "apps/habit-app-e2e/**/*.{ts,tsx,js,jsx}"
+            ],
             "maxWarnings": 0
           }
         }
@@ -186,7 +202,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/feature/habit-create-screen/**/*.{ts,tsx,js,jsx}"
@@ -196,7 +214,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/habit-app/feature/habit-create-screen"],
+          "outputs": [
+            "coverage/libs/habit-app/feature/habit-create-screen"
+          ],
           "options": {
             "jestConfig": "libs/habit-app/feature/habit-create-screen/jest.config.js",
             "passWithNoTests": true
@@ -217,7 +237,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/feature/habit-update-screen/**/*.{ts,tsx,js,jsx}"
@@ -227,7 +249,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/habit-app/feature/habit-update-screen"],
+          "outputs": [
+            "coverage/libs/habit-app/feature/habit-update-screen"
+          ],
           "options": {
             "jestConfig": "libs/habit-app/feature/habit-update-screen/jest.config.js",
             "passWithNoTests": true
@@ -248,7 +272,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/feature/habit-view-screen/**/*.{ts,tsx,js,jsx}"
@@ -258,7 +284,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/habit-app/feature/habit-view-screen"],
+          "outputs": [
+            "coverage/libs/habit-app/feature/habit-view-screen"
+          ],
           "options": {
             "jestConfig": "libs/habit-app/feature/habit-view-screen/jest.config.js",
             "passWithNoTests": true
@@ -279,7 +307,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/feature/habits-screen/**/*.{ts,tsx,js,jsx}"
@@ -289,7 +319,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/habit-app/feature/habits-screen"],
+          "outputs": [
+            "coverage/libs/habit-app/feature/habits-screen"
+          ],
           "options": {
             "jestConfig": "libs/habit-app/feature/habits-screen/jest.config.js",
             "passWithNoTests": true
@@ -310,7 +342,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/utils/graphql-types/**/*.{ts,tsx,js,jsx}"
@@ -320,7 +354,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/habit-app/utils/graphql-types"],
+          "outputs": [
+            "coverage/libs/habit-app/utils/graphql-types"
+          ],
           "options": {
             "jestConfig": "libs/habit-app/utils/graphql-types/jest.config.js",
             "passWithNoTests": true
@@ -351,7 +387,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/habit-app/utils/navigation-types/**/*.{ts,tsx,js,jsx}"
@@ -361,7 +399,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/habit-app/utils/navigation-types"],
+          "outputs": [
+            "coverage/libs/habit-app/utils/navigation-types"
+          ],
           "options": {
             "jestConfig": "libs/habit-app/utils/navigation-types/jest.config.js",
             "passWithNoTests": true
@@ -375,6 +415,40 @@
         }
       }
     },
+    "shared-assets": {
+      "root": "libs/shared/assets",
+      "sourceRoot": "libs/shared/assets/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/assets/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/assets"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/assets/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/shared-assets"
+            }
+          }
+        }
+      }
+    },
     "shared-auth": {
       "root": "libs/shared/auth",
       "sourceRoot": "libs/shared/auth/src",
@@ -382,14 +456,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/shared/auth/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/shared/auth/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/auth"],
+          "outputs": [
+            "coverage/libs/shared/auth"
+          ],
           "options": {
             "jestConfig": "libs/shared/auth/jest.config.js",
             "passWithNoTests": true
@@ -410,14 +490,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/shared/ui/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "libs/shared/ui/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/ui"],
+          "outputs": [
+            "coverage/libs/shared/ui"
+          ],
           "options": {
             "jestConfig": "libs/shared/ui/jest.config.js",
             "passWithNoTests": true
@@ -432,7 +518,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/shared/utils/apollo-provider/**/*.{ts,tsx,js,jsx}"
@@ -442,7 +530,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/utils/apollo-provider"],
+          "outputs": [
+            "coverage/libs/shared/utils/apollo-provider"
+          ],
           "options": {
             "jestConfig": "libs/shared/utils/apollo-provider/jest.config.js",
             "passWithNoTests": true
@@ -463,7 +553,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
             "lintFilePatterns": [
               "libs/shared/utils/secure-store/**/*.{ts,tsx,js,jsx}"
@@ -472,7 +564,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/utils/secure-store"],
+          "outputs": [
+            "coverage/libs/shared/utils/secure-store"
+          ],
           "options": {
             "jestConfig": "libs/shared/utils/secure-store/jest.config.js",
             "passWithNoTests": true
@@ -509,7 +603,9 @@
         },
         "bundle-ios": {
           "executor": "@nrwl/react-native:bundle",
-          "outputs": ["apps/storybook-app/build"],
+          "outputs": [
+            "apps/storybook-app/build"
+          ],
           "options": {
             "entryFile": "apps/storybook-app/src/main.tsx",
             "platform": "ios",
@@ -546,14 +642,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/storybook-app/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/storybook-app/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/storybook-app"],
+          "outputs": [
+            "coverage/apps/storybook-app"
+          ],
           "options": {
             "jestConfig": "apps/storybook-app/jest.config.js",
             "passWithNoTests": true
