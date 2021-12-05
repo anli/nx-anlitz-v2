@@ -443,7 +443,7 @@
           "configurations": {
             "ci": {
               "codeCoverage": true,
-              "coverageDirectory": "coverage/shared-assets"
+              "coverageDirectory": "coverage/libs-shared-assets"
             }
           }
         }
@@ -541,6 +541,40 @@
             "ci": {
               "codeCoverage": true,
               "coverageDirectory": "coverage/libs-shared-utils-apollo-provider"
+            }
+          }
+        }
+      }
+    },
+    "shared-utils-i18n": {
+      "root": "libs/shared/utils/i18n",
+      "sourceRoot": "libs/shared/utils/i18n/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/utils/i18n/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/utils/i18n"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/utils/i18n/jest.config.js",
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "codeCoverage": true,
+              "coverageDirectory": "coverage/libs-shared-utils-i18n"
             }
           }
         }

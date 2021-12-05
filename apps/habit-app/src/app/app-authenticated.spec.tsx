@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/client/testing';
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 import React from 'react';
 import 'react-native';
 import { App } from './app';
@@ -24,12 +24,16 @@ jest.mock('@nx-anlitz/shared/auth', () => {
 });
 
 describe('App', () => {
-  it('Authenticated User', () => {
+  it('Authenticated User', async () => {
     const { getByTestId } = render(
       <MockedProvider mocks={[]} addTypename={false}>
         <App />
       </MockedProvider>
     );
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
 
     expect(getByTestId('HabitsScreen')).toBeDefined();
   });

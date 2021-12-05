@@ -29,6 +29,10 @@
     "react-native-screens": "*",
     "react-native-splash-screen": "*",
     "react-test-renderer": "*",
-    "lottie-react-native": "*"
+    "lottie-react-native": "*",
+    "i18next": "*",
+    "react-i18next": "*",
+    "react-native-localize": "*",
+    "i18next-http-backend": "*"
   }
 }

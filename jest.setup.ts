@@ -25,3 +25,9 @@ jest.mock('react-native-splash-screen', () => ({
   show: jest.fn(),
   hide: jest.fn(),
 }));
+
+jest.mock('react-native-localize', () => {
+  return {
+    getLocales: jest.fn().mockReturnValue([{ languageCode: 'en' }]),
+  };
+});
