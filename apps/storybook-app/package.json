@@ -15,6 +15,13 @@
     "react-native": "*",
     "@shopify/restyle": "*",
     "@shopify/polaris-tokens": "*",
-    "faker": "*"
+    "faker": "*",
+    "react-native-paper": "*",
+    "@react-navigation/native": "*",
+    "@react-navigation/native-stack": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-screens": "*",
+    "react-native-typography": "*",
+    "react-native-pager-view": "*"
   }
 }

@@ -11,13 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ThemeProvider } from '@shopify/restyle';
 import { act, fireEvent, render } from '@testing-library/react-native';
-import {
-  addWeeks,
-  endOfWeek,
-  startOfToday,
-  startOfWeek,
-  subWeeks,
-} from 'date-fns';
+import { endOfWeek, startOfToday, startOfWeek } from 'date-fns';
 import React, { ReactNode } from 'react';
 import { HabitsScreen } from './habits-screen';
 import { formatDateRange } from './utils';
@@ -200,83 +194,6 @@ describe('Habits Screen', () => {
     expect(mockClearSession).toBeCalledTimes(1);
   });
 
-  it('See correct header title when previous period is press', async () => {
-    const { getByText, getByTestId } = render(
-      <CommonProviders>
-        <MockedProvider mocks={MockHasData} addTypename={false}>
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen
-                name="Screen"
-                component={HabitsScreen.Component}
-                options={HabitsScreen.options}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </MockedProvider>
-      </CommonProviders>
-    );
-    const initialStartDate = startOfWeek(startOfToday(), { weekStartsOn: 1 });
-    const initialEndDate = endOfWeek(startOfToday(), { weekStartsOn: 1 });
-
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-    fireEvent.press(getByTestId('PreviousPeriodButton'));
-    fireEvent.press(getByTestId('PreviousPeriodButton'));
-    fireEvent.press(getByTestId('PreviousPeriodButton'));
-    fireEvent.press(getByTestId('PreviousPeriodButton'));
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    expect(
-      getByText(
-        formatDateRange(
-          subWeeks(initialStartDate, 4),
-          subWeeks(initialEndDate, 4)
-        )
-      )
-    ).toBeDefined();
-  });
-
-  it('See correct header title when next period is press', async () => {
-    const { getByText, getByTestId } = render(
-      <CommonProviders>
-        <MockedProvider mocks={MockHasData} addTypename={false}>
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen
-                name="Screen"
-                component={HabitsScreen.Component}
-                options={HabitsScreen.options}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </MockedProvider>
-      </CommonProviders>
-    );
-    const initialStartDate = startOfWeek(startOfToday(), { weekStartsOn: 1 });
-    const initialEndDate = endOfWeek(startOfToday(), { weekStartsOn: 1 });
-
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-    fireEvent.press(getByTestId('NextPeriodButton'));
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-
-    expect(
-      getByText(
-        formatDateRange(
-          addWeeks(initialStartDate, 1),
-          addWeeks(initialEndDate, 1)
-        )
-      )
-    ).toBeDefined();
-  });
-
   it('See correct header title when today is press', async () => {
     const { getByText, getByTestId } = render(
       <CommonProviders>
@@ -296,13 +213,6 @@ describe('Habits Screen', () => {
     const initialStartDate = startOfWeek(startOfToday(), { weekStartsOn: 1 });
     const initialEndDate = endOfWeek(startOfToday(), { weekStartsOn: 1 });
 
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
-    fireEvent.press(getByTestId('NextPeriodButton'));
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 0));
-    });
     fireEvent.press(getByTestId('TodayButton'));
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
