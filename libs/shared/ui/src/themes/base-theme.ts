@@ -1,5 +1,6 @@
 import * as tokens from '@shopify/polaris-tokens';
 import { createTheme } from '@shopify/restyle';
+import { iOSUIKit } from 'react-native-typography';
 
 const pxToNumber = (px: string) => {
   return parseInt(px.replace('px', ''), 10);
@@ -15,6 +16,7 @@ const base = {
     critical: tokens.colorRed,
     primary: tokens.colorGreen,
     icon: tokens.colorBlack,
+    transparent: 'transparent',
   },
   spacing: {
     none: 0,
@@ -63,6 +65,10 @@ const base = {
   textVariants: {
     defaults: {
       fontSize: 18,
+      color: 'text',
+    },
+    largeTitleEmphasized: {
+      ...iOSUIKit.largeTitleEmphasizedObject,
       color: 'text',
     },
   },

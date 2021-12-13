@@ -33,6 +33,9 @@
     "i18next": "*",
     "react-i18next": "*",
     "react-native-localize": "*",
-    "i18next-http-backend": "*"
+    "i18next-http-backend": "*",
+    "@storybook/addon-actions": "*",
+    "react-native-pager-view": "*",
+    "react-native-typography": "*"
   }
 }

@@ -16,7 +16,7 @@ module.exports = withNxMetro(
       sourceExts: process.env.RN_SRC_EXT
         ? process.env.RN_SRC_EXT.split(',').concat(defaultSourceExts)
         : defaultSourceExts,
-      resolverMainFields: ['sbmodern', 'browser', 'main'],
+      resolverMainFields: ['react-native', 'sbmodern', 'browser', 'main'],
     },
   },
   {

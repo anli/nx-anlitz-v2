@@ -1,5 +1,6 @@
 export * from './button';
 export * from './fab';
+export * from './horizontal-bounce-view';
 export * from './icon-button';
 export * from './screen';
 export * from './text';
