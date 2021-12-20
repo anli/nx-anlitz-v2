@@ -36,6 +36,7 @@
     "i18next-http-backend": "*",
     "@storybook/addon-actions": "*",
     "react-native-pager-view": "*",
-    "react-native-typography": "*"
+    "react-native-typography": "*",
+    "react-native-elevation": "*"
   }
 }

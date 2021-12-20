@@ -244,10 +244,9 @@ describe('Habits Screen', () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
     expect(
-      getAllByTestId('HabitActivityDayCheckbox')[0].props.accessibilityState
-        .checked
+      getAllByTestId('Checkbox')[0].props.accessibilityState.checked
     ).toEqual(true);
-    fireEvent.press(getAllByTestId('HabitActivityDayCheckbox')[0]);
+    fireEvent.press(getAllByTestId('Checkbox')[0]);
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
@@ -277,10 +276,9 @@ describe('Habits Screen', () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });
     expect(
-      getAllByTestId('HabitActivityDayCheckbox')[1].props.accessibilityState
-        .checked
+      getAllByTestId('Checkbox')[1].props.accessibilityState.checked
     ).toEqual(false);
-    fireEvent.press(getAllByTestId('HabitActivityDayCheckbox')[1]);
+    fireEvent.press(getAllByTestId('Checkbox')[1]);
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });

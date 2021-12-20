@@ -14,7 +14,6 @@ const data = Array.from({ length: 100 }, (_, k) => {
 const Meta: ComponentMeta<typeof HorizontalBounceView> = {
   title: 'Horizontal Bounce View',
   component: HorizontalBounceView,
-  argTypes: { onChangeDirection: { action: 'clicked' } },
 };
 
 export default Meta;

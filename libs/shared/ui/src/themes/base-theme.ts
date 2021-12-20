@@ -9,6 +9,7 @@ const pxToNumber = (px: string) => {
 // https://www.figma.com/file/QwZvryiWjvuE0nnBWBDUXn/Polaris-for-Admin%3A-Colors-(Community)?node-id=2989%3A136
 const base = {
   colors: {
+    border: '#8C9196',
     surface: tokens.colorWhite,
     text: tokens.colorBlack,
     success: tokens.colorGreen,
@@ -63,12 +64,29 @@ const base = {
     },
   },
   textVariants: {
+    // https://github.com/hectahertz/react-native-typography/blob/master/src/collections/iOSUIKit.js
     defaults: {
       fontSize: 18,
       color: 'text',
     },
     largeTitleEmphasized: {
       ...iOSUIKit.largeTitleEmphasizedObject,
+      color: 'text',
+    },
+    caption2: {
+      ...iOSUIKit.caption2Object,
+      color: 'text',
+    },
+    caption2Emphasized: {
+      ...iOSUIKit.caption2EmphasizedObject,
+      color: 'text',
+    },
+    footnote: {
+      ...iOSUIKit.footnoteObject,
+      color: 'text',
+    },
+    footnoteEmphasized: {
+      ...iOSUIKit.footnoteEmphasizedObject,
       color: 'text',
     },
   },
