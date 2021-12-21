@@ -6,3 +6,4 @@ export * from './icon-button';
 export * from './screen';
 export * from './text';
 export * from './view';
+export * from './week-header';

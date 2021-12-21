@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import Elevations from 'react-native-elevation';
 import { Checkbox as PaperCheckbox } from 'react-native-paper';
 import { Text } from '../text';
@@ -13,7 +13,7 @@ type Props = {
 
 export const Card = ({ title, checkboxes, onPress }: Props) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <Pressable onPress={onPress}>
       <View
         backgroundColor="surface"
         style={[Elevations[2]]}
@@ -33,7 +33,7 @@ export const Card = ({ title, checkboxes, onPress }: Props) => {
         </View>
         <Text margin="baseTight">{title}</Text>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

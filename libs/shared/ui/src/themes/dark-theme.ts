@@ -12,5 +12,6 @@ export const darkTheme: Theme = {
     critical: tokens.colorRed,
     primary: tokens.colorGreenDark,
     icon: tokens.colorWhite,
+    border: tokens.colorWhite,
   },
 };
