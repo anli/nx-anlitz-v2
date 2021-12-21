@@ -13,6 +13,7 @@ import {
   Screen,
   Text,
   View,
+  WeekHeader,
 } from '@nx-anlitz/shared/ui';
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -154,13 +155,8 @@ const Component = () => {
   const handleNextPeriod = () =>
     setPeriodStartDate(addWeeks(periodStartDate, 1));
 
-  const headerData = eachDayOfInterval({
-    start: periodStartDate,
-    end: periodEndDate,
-  });
-
   return (
-    <Screen testID="HabitsScreen">
+    <Screen testID="HabitsScreepn">
       <HorizontalBounceView
         onStart={handlePreviousPeriod}
         onEnd={handleNextPeriod}
@@ -169,27 +165,7 @@ const Component = () => {
           <FlatList
             stickyHeaderIndices={[0]}
             ListHeaderComponent={
-              <View
-                backgroundColor="surface"
-                paddingVertical="tight"
-                paddingHorizontal="base"
-                flexDirection="row"
-                justifyContent="space-around"
-                marginHorizontal="tight"
-              >
-                {headerData.map((day) => {
-                  const variant =
-                    formatISO(day) === formatISO(startOfToday())
-                      ? 'footnoteEmphasized'
-                      : 'footnote';
-                  return (
-                    <View>
-                      <Text variant={variant}>{format(day, 'd')}</Text>
-                      <Text variant={variant}>{format(day, 'EEEEEE')}</Text>
-                    </View>
-                  );
-                })}
-              </View>
+              <WeekHeader startDate={periodStartDate} endDate={periodEndDate} />
             }
             data={mappedData}
             renderItem={({ item: { id, name, data: _data } }) => {
