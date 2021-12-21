@@ -6,6 +6,7 @@ import {
 import { RootStackParamList } from '@nx-anlitz/habit-app/utils/navigation-types';
 import { useAuth } from '@nx-anlitz/shared/auth';
 import {
+  Card,
   FAB,
   HorizontalBounceView,
   IconButton,
@@ -29,8 +30,7 @@ import {
   subWeeks,
 } from 'date-fns';
 import React, { useCallback, useLayoutEffect, useState } from 'react';
-import { FlatList, TouchableOpacity } from 'react-native';
-import { HabitActivityDayCheckbox } from './components';
+import { FlatList } from 'react-native';
 import { filterNullable, formatDateRange } from './utils';
 
 const Component = () => {
@@ -154,6 +154,11 @@ const Component = () => {
   const handleNextPeriod = () =>
     setPeriodStartDate(addWeeks(periodStartDate, 1));
 
+  const headerData = eachDayOfInterval({
+    start: periodStartDate,
+    end: periodEndDate,
+  });
+
   return (
     <Screen testID="HabitsScreen">
       <HorizontalBounceView
@@ -162,33 +167,54 @@ const Component = () => {
       >
         {!loading && (
           <FlatList
+            stickyHeaderIndices={[0]}
+            ListHeaderComponent={
+              <View
+                backgroundColor="surface"
+                paddingVertical="tight"
+                paddingHorizontal="base"
+                flexDirection="row"
+                justifyContent="space-around"
+                marginHorizontal="tight"
+              >
+                {headerData.map((day) => {
+                  const variant =
+                    formatISO(day) === formatISO(startOfToday())
+                      ? 'footnoteEmphasized'
+                      : 'footnote';
+                  return (
+                    <View>
+                      <Text variant={variant}>{format(day, 'd')}</Text>
+                      <Text variant={variant}>{format(day, 'EEEEEE')}</Text>
+                    </View>
+                  );
+                })}
+              </View>
+            }
             data={mappedData}
             renderItem={({ item: { id, name, data: _data } }) => {
+              const checkboxes = _data.map((dailyActivity) => {
+                return {
+                  key: format(dailyActivity.date, 'yyyy-MM-dd'),
+                  value: Boolean(dailyActivity?.count),
+                  onPress: () =>
+                    handleUpdateHabitActivity({
+                      date: formatISO(dailyActivity.date),
+                      count: dailyActivity?.count ? 0 : 1,
+                      habitId: id,
+                      habitActivityId: dailyActivity?.id,
+                    }),
+                };
+              });
+
               return (
-                <>
-                  <View padding="base">
-                    <TouchableOpacity
-                      key={`${id}`}
-                      onPress={() => handleViewHabit(id)}
-                    >
-                      <Text>{name}</Text>
-                    </TouchableOpacity>
-                  </View>
-                  <View flexDirection="row" justifyContent="space-evenly">
-                    {_data.map((dailyActivity) => (
-                      <HabitActivityDayCheckbox
-                        testID="HabitActivityDayCheckbox"
-                        key={format(dailyActivity.date, 'yyyy-MM-dd')}
-                        title={format(dailyActivity.date, 'EEEEEE')}
-                        date={formatISO(dailyActivity.date)}
-                        count={dailyActivity?.count}
-                        habitId={id}
-                        habitActivityId={dailyActivity?.id}
-                        onPress={handleUpdateHabitActivity}
-                      />
-                    ))}
-                  </View>
-                </>
+                <View paddingHorizontal="base" paddingVertical="tight">
+                  <Card
+                    onPress={() => handleViewHabit(id)}
+                    title={name}
+                    checkboxes={checkboxes}
+                  />
+                </View>
               );
             }}
             keyExtractor={({ id }) => `${id}`}

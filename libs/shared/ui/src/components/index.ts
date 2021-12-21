@@ -1,4 +1,5 @@
 export * from './button';
+export * from './card';
 export * from './fab';
 export * from './horizontal-bounce-view';
 export * from './icon-button';
